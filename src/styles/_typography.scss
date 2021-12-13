@@ -1,0 +1,64 @@
+@mixin typography($size, $style, $weight, $height, $spacing, $align) {
+  font-size: $size;
+  font-style: $style;
+  font-weight: $weight;
+  line-height: $height;
+  letter-spacing: $spacing;
+  text-align: $align;
+}
+
+@mixin heading-1 {
+  @include typography(60px, normal, 700, 72px, -0.005em, left);
+}
+
+@mixin heading-2 {
+  @include typography(48px, normal, 700, 56px, 0em, left);
+}
+
+@mixin heading-3 {
+  @include typography(34px, normal, 800, 40px, 0em, left);
+}
+
+@mixin headline {
+  @include typography(24px, normal, 800, 32px, 0.01em, left);
+}
+
+@mixin sub-headline {
+  @include typography(18px, normal, 700, 24px, 0.01em, left);
+}
+
+@mixin body {
+  @include typography(16px, normal, 400, 24px, 0em, left);
+}
+
+@mixin body-bold {
+  @include body();
+
+  font-weight: 700;
+}
+
+@mixin body-small {
+  @include typography(14px, normal, 400, 16px, 0em, left);
+}
+
+@mixin body-small-bold {
+  @include body-small();
+
+  font-weight: 700;
+}
+
+@mixin caption {
+  @include typography(12px, normal, 600, 16px, 0.03em, left);
+}
+
+@mixin btn-large {
+  @include typography(16px, normal, 700, 24px, 0.03em, left);
+}
+
+@mixin btn-medium {
+  @include typography(14px, normal, 700, 16px, 0.02em, left);
+}
+
+@mixin btn-small {
+  @include typography(12px, normal, 700, 16px, 0.04em, left);
+}
