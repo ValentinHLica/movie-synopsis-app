@@ -1,9 +1,34 @@
-import { Button } from "@ui";
+import { useContext } from "react";
 
-import styles from "@styles/pages/Home/index.module.scss";
+import Context from "@components/Context";
+
+import Layout from "@components/Layout";
+import { Input } from "@ui";
+
+import styles from "@styles/pages/home.module.scss";
 
 const HomePage: React.FC = () => {
-  return <div className={styles.home}></div>;
+  const { setSearchQuery } = useContext(Context);
+
+  const onSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
+    e.preventDefault();
+  };
+
+  return (
+    <Layout>
+      <div className={styles.search__container}>
+        <form onSubmit={onSubmit}>
+          <Input
+            placeholder="Search Movie..."
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+          <button type="submit" />
+        </form>
+
+        <div className={styles.filter}></div>
+      </div>
+    </Layout>
+  );
 };
 
 export default HomePage;

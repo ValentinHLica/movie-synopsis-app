@@ -19,9 +19,9 @@
     align-items: center;
     justify-content: space-between;
 
-    .text {
-      &.text_with_icon {
-        margin-left: 10px;
+    .children {
+      &.children_with_icon {
+        padding-left: 10px;
       }
     }
   }

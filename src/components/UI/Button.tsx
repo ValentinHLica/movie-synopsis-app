@@ -14,7 +14,6 @@ type Props = {
   type?: Type;
   onClick?: () => void;
   loading?: boolean;
-  text?: string;
   icon?: JSX.Element | null;
 };
 
@@ -26,7 +25,6 @@ const Button: React.FC<Props> = ({
   type = "primary",
   onClick,
   loading,
-  text,
   icon = null,
 }) => {
   const attributes = {
@@ -35,19 +33,21 @@ const Button: React.FC<Props> = ({
     } ${styles[`container__${type}`]} ${!url ? styles.container__btn : ""}`,
   };
 
+  const content = children && (
+    <p
+      className={`${styles.children} ${
+        icon || loading ? styles.children_with_icon : ""
+      }`}
+    >
+      {children}
+    </p>
+  );
+
   if (url) {
     return (
       <Link to={url} {...attributes}>
         {icon}
-        {text && (
-          <p
-            className={`${styles.text} ${
-              icon || loading ? styles.text_with_icon : ""
-            }`}
-          >
-            {text}
-          </p>
-        )}
+        {content}
       </Link>
     );
   }
@@ -56,15 +56,7 @@ const Button: React.FC<Props> = ({
     <button {...attributes} onClick={onClick}>
       {loading && <Spinner size="sm" className={styles.container__loading} />}
       {!loading && icon}
-      {text && (
-        <p
-          className={`${styles.text} ${
-            icon || loading ? styles.text_with_icon : ""
-          }`}
-        >
-          {text}
-        </p>
-      )}
+      {content}
     </button>
   );
 };

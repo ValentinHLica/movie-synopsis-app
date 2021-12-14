@@ -1,6 +1,6 @@
 import React from "react";
 
-import { SpinnerIcon } from "@icon";
+import { LoaderIcon } from "@icon";
 
 import { Size } from "@interface/UI/button";
 
@@ -18,7 +18,7 @@ const Spinner: React.FC<Props> = ({ size = "md", className }) => {
         className ?? ""
       }`}
     >
-      <SpinnerIcon />
+      <LoaderIcon />
     </div>
   );
 };

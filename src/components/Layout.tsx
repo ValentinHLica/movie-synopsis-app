@@ -1,14 +1,22 @@
-import React from "react";
+import React, { Fragment } from "react";
 
-import Header from "@components/Header";
+import Header from "./Header";
 
-const Layout: React.FC = ({ children }) => {
+type Props = {
+  nav?: {
+    text: string;
+    url?: string;
+    onClick?: () => void;
+  }[];
+};
+
+const Layout: React.FC<Props> = ({ nav, children }) => {
   return (
-    <>
-      <Header />
+    <Fragment>
+      <Header nav={nav} />
 
       <main>{children}</main>
-    </>
+    </Fragment>
   );
 };
 

@@ -1,21 +1,21 @@
-import { createContext } from "react";
+import { createContext, useState } from "react";
 
 interface State {
-  //   theme: Theme;
-  //   changeTheme: () => void;
+  searchQuery: string;
+  setSearchQuery: (query: string) => void;
 }
 
 const Context = createContext<State>({
-  //   theme: "dark",
-  //   changeTheme: () => null,
+  searchQuery: "",
+  setSearchQuery: () => null,
 });
 
 export const ContextProvider: React.FC = ({ children }) => {
-  //   const [theme, setTheme] = useState<Theme>("light");
+  const [searchQuery, setSearchQuery] = useState<string>("");
 
   const context = {
-    // theme,
-    // changeTheme,
+    searchQuery,
+    setSearchQuery,
   };
 
   return <Context.Provider value={context}>{children}</Context.Provider>;

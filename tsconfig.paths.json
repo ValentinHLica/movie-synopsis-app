@@ -11,6 +11,7 @@
       "@ui": ["components/UI/index.tsx"],
       "@icon": ["components/CustomIcons.tsx"],
       "@pages/*": ["pages/*"],
+      "@api/*": ["api/*"],
       "@context": ["components/Context.tsx"]
     }
   }
