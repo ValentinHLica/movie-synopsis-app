@@ -34,7 +34,7 @@
 @mixin body-bold {
   @include body();
 
-  font-weight: 700;
+  font-weight: 600;
 }
 
 @mixin body-small {
@@ -44,7 +44,7 @@
 @mixin body-small-bold {
   @include body-small();
 
-  font-weight: 700;
+  font-weight: 600;
 }
 
 @mixin caption {

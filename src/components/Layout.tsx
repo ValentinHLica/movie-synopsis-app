@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 
 import Header from "./Header";
+import { Spinner } from "@ui";
 
 type Props = {
   nav?: {
@@ -8,14 +9,15 @@ type Props = {
     url?: string;
     onClick?: () => void;
   }[];
+  loading?: boolean;
 };
 
-const Layout: React.FC<Props> = ({ nav, children }) => {
+const Layout: React.FC<Props> = ({ nav, loading, children }) => {
   return (
     <Fragment>
       <Header nav={nav} />
 
-      <main>{children}</main>
+      <main>{loading ? <Spinner /> : children}</main>
     </Fragment>
   );
 };

@@ -12,6 +12,7 @@ module.exports = function override(config) {
     "@icon": "src/components/CustomIcons.tsx",
     "@api": "src/api",
     "@context": "src/components/Context.tsx",
+    "@data": "src/data",
   })(config);
 
   return config;

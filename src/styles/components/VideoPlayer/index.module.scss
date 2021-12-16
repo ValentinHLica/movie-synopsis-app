@@ -1,0 +1,23 @@
+.player {
+  position: relative;
+
+  .video {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: black;
+    border-radius: var(--border-radius);
+
+    &::-webkit-media-controls-fullscreen-button {
+      display: none !important;
+    }
+
+    .player_header {
+      position: absolute;
+      top: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+}

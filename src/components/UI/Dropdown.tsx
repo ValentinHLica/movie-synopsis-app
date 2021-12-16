@@ -4,7 +4,7 @@ import Button from "./Button";
 
 import { Size, Type } from "@interface/UI/button";
 
-import styles from "@styles/UI/dropdown.module.scss";
+import styles from "@styles/components/UI/dropdown.module.scss";
 
 type Props = {
   icon?: JSX.Element;
@@ -13,7 +13,7 @@ type Props = {
   type?: Type;
   items: {
     icon?: JSX.Element;
-    text: string;
+    text: string | number;
     onClick: () => void;
   }[];
   onClick?: () => void;
