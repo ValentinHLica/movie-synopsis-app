@@ -1,12 +1,30 @@
 .timestamp {
   position: absolute;
-  top: 0;
-  right: 0;
-  z-index: 1;
+  bottom: 25px;
+  max-height: 40vh;
+  min-height: 100%;
+  width: 40vw;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
   background-color: white;
-  margin: 10px;
   padding: 10px;
-  max-width: 300px;
-  width: 100%;
-  border-radius: var(--border-radius);
+  visibility: visible;
+  opacity: 1;
+  transition: visibility 0.3s ease, opacity 0.3s ease;
+
+  &__hidden {
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  .timestamps {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+  }
+
+  h4 {
+    text-align: center;
+  }
 }

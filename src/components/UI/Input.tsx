@@ -8,7 +8,6 @@ type Props = {
   type?: "text" | "number";
   placeholder?: string;
   inputRef?: LegacyRef<HTMLInputElement>;
-  size?: Size;
   readOnly?: boolean;
   value?: string | number;
   onChange?: ChangeEventHandler<HTMLInputElement>;
@@ -19,14 +18,13 @@ const Input: React.FC<Props> = ({
   type = "text",
   placeholder,
   inputRef,
-  size = "md",
   readOnly = false,
   value,
   onChange,
   invisible,
 }) => {
   const attributes = {
-    className: `${styles.container} ${styles[`container__${size}`]} ${
+    className: `${styles.container} ${
       invisible ? styles.container__invisible : ""
     } input`,
     type,

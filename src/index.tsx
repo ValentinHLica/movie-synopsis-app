@@ -1,9 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./App";
 
-// import "react-image-crop/dist/ReactCrop.css";
+import Editor from "@pages/editor";
 
 import "./styles/main.scss";
 
-ReactDOM.render(<App />, document.getElementById("app"));
+ReactDOM.render(<Editor />, document.getElementById("app"));

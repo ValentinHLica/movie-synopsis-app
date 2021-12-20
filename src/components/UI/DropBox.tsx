@@ -13,6 +13,7 @@ const DropBox: React.FC<Props> = ({ onDrop, onClick }) => {
   return (
     <div className={styles.dropbox} onDrop={onDrop} onClick={onClick}>
       <LinkIcon />
+      Please select a movie
     </div>
   );
 };

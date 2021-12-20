@@ -1,0 +1,18 @@
+.stamp {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 10px;
+
+  textarea {
+    max-height: 50px;
+    border: 1px solid var(--gray-10);
+    width: 100%;
+    max-width: unset;
+    min-width: unset;
+  }
+
+  input {
+    max-width: 75px;
+  }
+}

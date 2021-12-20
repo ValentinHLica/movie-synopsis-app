@@ -26,7 +26,7 @@ export const ExpandAltIcon = () => (
   </svg>
 );
 
-export const MinimiseIcon = () => (
+export const MinimizeIcon = () => (
   <svg
     className="icon"
     viewBox="0 0 15 15"
@@ -40,7 +40,7 @@ export const MinimiseIcon = () => (
   </svg>
 );
 
-export const MinimiseAltIcon = () => (
+export const MinimizeAltIcon = () => (
   <svg
     className="icon"
     viewBox="0 0 15 15"
