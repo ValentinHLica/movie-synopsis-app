@@ -1,6 +1,7 @@
 import React from "react";
 
 import { TextArea, Input, Button } from "@ui";
+import { BinIcon, PlusCircleIcon } from "@icon";
 
 import styles from "@styles/components/VideoPlayer/stamp.module.scss";
 
@@ -10,6 +11,7 @@ type Props = {
   time: string;
   onChangeTime: React.ChangeEventHandler<HTMLInputElement>;
   onAdd?: () => void;
+  onRemove?: () => void;
 };
 
 const Stamp: React.FC<Props> = ({
@@ -18,6 +20,7 @@ const Stamp: React.FC<Props> = ({
   time,
   onChangeTime,
   onAdd,
+  onRemove,
 }) => {
   return (
     <div className={styles.stamp}>
@@ -26,8 +29,20 @@ const Stamp: React.FC<Props> = ({
         value={text}
         placeholder="Synopsis text..."
       />
+
       <Input onChange={onChangeTime} value={time} placeholder="Timestamp..." />
-      {onAdd && <Button onClick={onAdd}>Add</Button>}
+
+      {onAdd && (
+        <Button onClick={onAdd} size="sm" icon={<PlusCircleIcon />}>
+          Add
+        </Button>
+      )}
+
+      {onRemove && (
+        <Button onClick={onRemove} type="danger" size="sm" icon={<BinIcon />}>
+          Remove
+        </Button>
+      )}
     </div>
   );
 };

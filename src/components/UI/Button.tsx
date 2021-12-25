@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 import Spinner from "./Spinner";
 
@@ -15,6 +14,7 @@ type Props = {
   onClick?: () => void;
   loading?: boolean;
   icon?: JSX.Element | null;
+  disabled?: boolean;
 };
 
 const Button: React.FC<Props> = ({
@@ -26,11 +26,13 @@ const Button: React.FC<Props> = ({
   onClick,
   loading,
   icon = null,
+  disabled,
 }) => {
   const attributes = {
     className: `${styles.container} ${className} ${
       styles[`container__${size}`]
     } ${styles[`container__${type}`]} ${!url ? styles.container__btn : ""}`,
+    disabled,
   };
 
   const content = children && (
@@ -43,17 +45,15 @@ const Button: React.FC<Props> = ({
     </p>
   );
 
-  if (url) {
-    return (
-      <Link to={url} {...attributes}>
-        {icon}
-        {content}
-      </Link>
-    );
-  }
-
   return (
-    <button {...attributes} onClick={onClick}>
+    <button
+      {...attributes}
+      onClick={() => {
+        if (onClick && !disabled) {
+          onClick();
+        }
+      }}
+    >
       {loading && <Spinner size="sm" className={styles.container__loading} />}
       {!loading && icon}
       {content}

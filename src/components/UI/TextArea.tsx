@@ -7,6 +7,8 @@ type Props = {
   elementRef?: React.LegacyRef<HTMLTextAreaElement>;
   value?: string | number | readonly string[];
   placeholder?: string;
+  cols?: number;
+  rows?: number;
 };
 
 const TextArea: React.FC<Props> = ({
@@ -14,12 +16,14 @@ const TextArea: React.FC<Props> = ({
   elementRef,
   value,
   placeholder,
+  cols,
+  rows,
 }) => {
   return (
     <textarea
       className={styles.text_area}
-      cols={30}
-      rows={10}
+      cols={cols ?? 30}
+      rows={rows ?? 3}
       onChange={onChange}
       ref={elementRef}
       value={value}

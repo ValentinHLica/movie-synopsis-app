@@ -9,6 +9,7 @@
   transition: background-color var(--transition-time)
     var(--transition-animation);
   margin: 10px;
+  border-radius: var(--border-radius);
 
   svg {
     margin-right: 10px;

@@ -32,10 +32,12 @@ const Progress: React.FC<Props> = ({ videoEl }) => {
       videoEl.current.addEventListener("timeupdate", handleTimeUpdate);
     }
 
-    return () => {
-      videoEl.current?.removeEventListener("timeupdate", handleTimeUpdate);
-    };
-  }, []);
+    // return () => {
+    //   if (videoEl.current) {
+    //     videoEl.current.removeEventListener("timeupdate", handleTimeUpdate);
+    //   }
+    // };
+  }, [videoEl]);
 
   return (
     <div className={styles.progress} ref={progressEl} onClick={onClick}>

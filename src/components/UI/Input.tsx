@@ -1,11 +1,9 @@
 import React, { ChangeEventHandler, LegacyRef } from "react";
 
-import { Size } from "@interface/UI/button";
-
 import styles from "@styles/components/UI/input.module.scss";
 
 type Props = {
-  type?: "text" | "number";
+  type?: "text" | "number" | "time";
   placeholder?: string;
   inputRef?: LegacyRef<HTMLInputElement>;
   readOnly?: boolean;
@@ -33,6 +31,16 @@ const Input: React.FC<Props> = ({
     readOnly,
     value,
     onChange,
+    ...(() => {
+      if (type === "time") {
+        return {
+          step: 2,
+          min: 0,
+        };
+      }
+
+      return {};
+    })(),
   };
 
   return <input {...attributes} />;

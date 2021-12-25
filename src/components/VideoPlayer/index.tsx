@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import Controls from "./Controls";
 
@@ -11,16 +11,19 @@ type Props = {
 const Player: React.FC<Props> = ({ video }) => {
   const videoEl = useRef<HTMLVideoElement>(null);
   const playerEl = useRef<HTMLDivElement>(null);
+  const [settings, setSettings] = useState<boolean>(false);
   const [viewTimestamp, setViewTimestamp] = useState<boolean>(false);
-  const [script, setScript] = useState<string>("");
+  const [mouseMove, setMouseMove] = useState<boolean>(false);
+  const timeOut = useRef<NodeJS.Timeout>();
 
   const onVideoClick = () => {
     if (videoEl.current) {
       const method = videoEl.current.paused ? "play" : "pause";
       videoEl.current[method]();
 
-      if (viewTimestamp && method === "play") {
+      if (method === "play") {
         setViewTimestamp(false);
+        setSettings(false);
       }
     }
   };
@@ -38,8 +41,28 @@ const Player: React.FC<Props> = ({ video }) => {
     }
   };
 
+  const onMouseMove = () => {
+    setMouseMove(true);
+
+    if (timeOut.current) {
+      clearTimeout(timeOut.current);
+    }
+
+    if (!viewTimestamp) {
+      timeOut.current = setTimeout(() => {
+        setMouseMove(false);
+      }, 2000);
+    }
+  };
+
+  useEffect(() => {
+    if (playerEl.current) {
+      playerEl.current.style.cursor = !mouseMove ? "none" : "pointer";
+    }
+  }, [mouseMove]);
+
   return (
-    <div className={styles.player} ref={playerEl}>
+    <div className={styles.player} ref={playerEl} onMouseMove={onMouseMove}>
       <video
         src={video}
         className={styles.video}
@@ -55,8 +78,9 @@ const Player: React.FC<Props> = ({ video }) => {
         videoPath={video}
         viewTimestamp={viewTimestamp}
         setViewTimestamp={setViewTimestamp}
-        script={script}
-        setScript={setScript}
+        settings={settings}
+        setSettings={setSettings}
+        visible={mouseMove}
       />
     </div>
   );

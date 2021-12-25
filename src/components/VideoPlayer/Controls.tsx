@@ -4,12 +4,13 @@ import moment from "moment";
 
 import { TimeStamp as TimeStampType } from "@interface/movie";
 
-import { ExpandIcon, MinimizeIcon } from "@icon";
+import { CogIcon, ExpandIcon, MinimizeIcon } from "@icon";
 import TimeStamp from "./Timestamp";
 import Progress from "./Progress";
-import { splitText } from "@utils/helpers";
+import Settings from "./Settings";
 
 import styles from "@styles/components/VideoPlayer/controls.module.scss";
+import Subtitle from "./Subtitle";
 
 type Props = {
   videoEl: React.RefObject<HTMLVideoElement>;
@@ -17,8 +18,9 @@ type Props = {
   playerEl: React.RefObject<HTMLDivElement>;
   viewTimestamp: boolean;
   setViewTimestamp: React.Dispatch<React.SetStateAction<boolean>>;
-  script: string;
-  setScript: React.Dispatch<React.SetStateAction<string>>;
+  settings: boolean;
+  setSettings: React.Dispatch<React.SetStateAction<boolean>>;
+  visible: boolean;
 };
 
 const Controls: React.FC<Props> = ({
@@ -27,14 +29,14 @@ const Controls: React.FC<Props> = ({
   playerEl,
   viewTimestamp,
   setViewTimestamp,
-  script,
-  setScript,
+  settings,
+  setSettings,
+  visible,
 }) => {
   const [addStamp, setAddStamp] = useState<TimeStampType>({
     text: "",
     startTime: "",
   });
-
   const [timestamps, setTimestamps] = useState<TimeStampType[]>([]);
   const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
   const [currentTime, setCurrentTime] = useState<number>(0);
@@ -42,6 +44,8 @@ const Controls: React.FC<Props> = ({
   const videoControl = (e: KeyboardEvent) => {
     const video = videoEl.current;
     const key = e.code;
+
+    if (document.activeElement?.tagName !== "BODY") return;
 
     if (!video) return;
 
@@ -61,6 +65,7 @@ const Controls: React.FC<Props> = ({
       if (video.paused || video.ended) {
         video.play();
         setViewTimestamp(false);
+        setSettings(false);
       } else {
         video.pause();
       }
@@ -89,20 +94,38 @@ const Controls: React.FC<Props> = ({
   const timestampHandler = () => {
     setViewTimestamp(true);
 
-    if (
-      timestamps.length > 1 &&
-      timestamps.filter((item) => item.startTime === "").length > 0
-    ) {
-      setAddStamp({
-        text: timestamps.filter((item) => item.startTime === "")[0].text,
-        startTime: moment.utc(currentTime * 1000).format("HH:mm:ss"),
-      });
+    if (settings) {
+      setSettings(false);
+    }
+
+    setAddStamp((prevState) => ({
+      ...prevState,
+      startTime: moment.utc(currentTime * 1000).format("HH:mm:ss"),
+    }));
+
+    if (videoEl.current) {
+      videoEl.current.pause();
+    }
+  };
+
+  const settingsHandler = () => {
+    setSettings(true);
+
+    if (viewTimestamp) {
+      setViewTimestamp(false);
     }
 
     if (videoEl.current) {
       videoEl.current.pause();
     }
   };
+
+  useEffect(() => {
+    setAddStamp((prevState) => ({
+      ...prevState,
+      startTime: moment.utc(currentTime * 1000).format("HH:mm:ss"),
+    }));
+  }, [currentTime]);
 
   useEffect(() => {
     window.onkeydown = videoControl;
@@ -117,37 +140,16 @@ const Controls: React.FC<Props> = ({
       playerEl.current.onfullscreenchange = () =>
         setIsFullscreen((prevValue) => !prevValue);
     }
+    // eslint-disable-next-line
   }, []);
 
-  useEffect(() => {
-    const newTimeScript: TimeStampType[] = splitText(script).map((text) => ({
-      text,
-      startTime: "",
-    }));
-
-    setTimestamps(newTimeScript);
-  }, [script]);
-
   return (
-    <div className={styles.controls}>
-      {timestamps.length > 1 && (
-        <p className={styles.timestamp}>
-          {
-            // (timestamps.filter(
-            //   (item) =>
-            //     item.startTime ===
-            //     moment.utc(currentTime * 1000).format("HH:mm:ss")
-            // ).length > 0 &&
-            //   timestamps.filter(
-            //     (item) =>
-            //       item.startTime ===
-            //       moment.utc(currentTime * 1000).format("HH:mm:ss")
-            //   )[0].text) ??
-            timestamps.filter((item) => item.startTime === "").length > 0 &&
-              timestamps.filter((item) => item.startTime === "")[0].text
-          }
-        </p>
-      )}
+    <div
+      className={`${styles.controls} ${
+        visible ? styles.controls__visible : ""
+      }`}
+    >
+      <Subtitle timestamps={timestamps} currentTime={currentTime} />
 
       <p className={styles.timer} onClick={timestampHandler}>
         {moment.utc(currentTime * 1000).format("HH:mm:ss")}
@@ -155,9 +157,15 @@ const Controls: React.FC<Props> = ({
 
       <Progress videoEl={videoEl} />
 
+      <div className={styles.expand} onClick={settingsHandler}>
+        <CogIcon />
+      </div>
+
       <div className={styles.expand} onClick={onExpand}>
         {!isFullscreen ? <ExpandIcon /> : <MinimizeIcon />}
       </div>
+
+      <Settings visible={settings} />
 
       <TimeStamp
         addStamp={addStamp}
@@ -165,9 +173,8 @@ const Controls: React.FC<Props> = ({
         timestamps={timestamps}
         setTimestamps={setTimestamps}
         visible={viewTimestamp}
-        script={script}
-        setScript={setScript}
         videoPath={videoPath}
+        currentTime={currentTime}
       />
     </div>
   );

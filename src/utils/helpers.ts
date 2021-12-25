@@ -159,14 +159,19 @@ export const splitText = (text: string): string[] => {
   for (const word of words) {
     sentence.push(word);
 
-    const chars = [",", ".", "!", "?", "and", "then"];
+    const chars = [",", ".", "!", "?"];
 
     const mergedText = sentence.join(" ");
 
-    if (
-      (chars.some((char) => word.includes(char)) && mergedText.length > 50) ||
-      mergedText.length > 75
-    ) {
+    let mush: boolean = false;
+
+    for (const char of chars) {
+      if (word.includes(char)) {
+        mush = true;
+      }
+    }
+
+    if (mush || mergedText.length > 75) {
       sentences.push(mergedText);
       sentence = [];
     }

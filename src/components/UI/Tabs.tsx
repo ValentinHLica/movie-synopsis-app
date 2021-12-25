@@ -1,20 +1,13 @@
-import React, { Fragment, useEffect, useState } from "react";
-
-import { TimeStamp as TimeStampType } from "@interface/movie";
+import React, { Fragment, useState } from "react";
 
 import styles from "@styles/components/UI/tabs.module.scss";
 
 type Props = {
-  timestamps?: TimeStampType[];
   tabs: { text: string; content: JSX.Element }[];
 };
 
-const Tabs: React.FC<Props> = ({ timestamps, tabs }) => {
+const Tabs: React.FC<Props> = ({ tabs }) => {
   const [currentTab, setCurrentTab] = useState<number>(0);
-
-  useEffect(() => {
-    setCurrentTab(0);
-  }, [timestamps]);
 
   return (
     <Fragment>

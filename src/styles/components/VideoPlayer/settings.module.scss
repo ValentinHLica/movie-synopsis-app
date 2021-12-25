@@ -1,0 +1,23 @@
+.settings {
+  position: absolute;
+  bottom: 25px;
+  right: 0;
+  max-height: 40vh;
+  min-height: 100%;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  background-color: white;
+  padding: 10px;
+  visibility: visible;
+  opacity: 1;
+  transition: visibility 0.3s ease, opacity 0.3s ease;
+  border-radius: var(--border-radius);
+  cursor: auto !important;
+
+  &__hidden {
+    visibility: hidden;
+    opacity: 0;
+  }
+}

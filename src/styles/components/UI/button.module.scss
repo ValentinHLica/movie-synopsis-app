@@ -6,13 +6,16 @@
 }
 
 .container {
-  border-radius: var(--border-radius);
   cursor: pointer;
   color: white;
   border: none;
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
   display: inline-block;
   box-shadow: 0 0 1px var(--gray-400);
+
+  &[disabled] {
+    cursor: not-allowed;
+  }
 
   &__btn {
     display: flex;

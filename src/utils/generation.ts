@@ -8,17 +8,27 @@ import { TimeStamp } from "@interface/movie";
 const { execFile } = window.require("child_process");
 const { writeFileSync, existsSync, mkdirSync } = window.require("fs");
 
+type CreateVideo = (args: {
+  videoPath: string;
+  timeStamps: TimeStamp[];
+  exportPath: string;
+  setProgress: React.Dispatch<React.SetStateAction<number>>;
+  setTotalProgress: React.Dispatch<React.SetStateAction<number>>;
+}) => Promise<any>;
+
 /**
  * Generate single comment tree images
  * @param title Post Title
  * @param comments Comments List
  * @param path Path to export final output
  */
-export const createMovie = async (
-  videoPath: string,
-  timeStamps: TimeStamp[],
-  exportPath: string
-): Promise<any> => {
+export const createMovie: CreateVideo = async ({
+  videoPath,
+  timeStamps,
+  exportPath,
+  setProgress,
+  setTotalProgress,
+}) => {
   try {
     if (!existsSync(tempPath)) {
       mkdirSync(tempPath);
@@ -51,6 +61,22 @@ export const createMovie = async (
         logger("Video rendered successfully", "success");
 
         resolve(stdout);
+      }).stdout.on("data", (data: string) => {
+        if (data.includes("process-count=")) {
+          setTotalProgress((prevState) => {
+            if (prevState !== 0) {
+              return prevState;
+            }
+
+            return parseInt(data.split("=")[1]);
+          });
+        }
+
+        if (data.includes("-generated")) {
+          setProgress((prevState) => {
+            return prevState + 1;
+          });
+        }
       });
     });
   } catch (err) {
