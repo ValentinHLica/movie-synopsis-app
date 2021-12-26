@@ -14,6 +14,9 @@ type CreateVideo = (args: {
   exportPath: string;
   setProgress: React.Dispatch<React.SetStateAction<number>>;
   setTotalProgress: React.Dispatch<React.SetStateAction<number>>;
+  voice: string;
+  title: string;
+  categories: string[];
 }) => Promise<any>;
 
 /**
@@ -28,6 +31,9 @@ export const createMovie: CreateVideo = async ({
   exportPath,
   setProgress,
   setTotalProgress,
+  voice,
+  title,
+  categories,
 }) => {
   try {
     if (!existsSync(tempPath)) {
@@ -44,13 +50,15 @@ export const createMovie: CreateVideo = async ({
         moviePath: videoPath,
         timeStamps,
         exportPath,
+        title,
+        categories,
       })
     );
 
     return new Promise(async (resolve) => {
       logger("Rendering Video", "action");
 
-      const args = [`MOVIE=${postPath}`, `VOICE=ScanSoft`];
+      const args = [`MOVIE=${postPath}`, `VOICE=${voice}`];
 
       await execFile(renderPath, args, (error: any, stdout: string) => {
         if (error) {

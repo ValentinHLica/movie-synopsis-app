@@ -17,6 +17,7 @@ type Props = {
     onClick: () => void;
   }[];
   onClick?: () => void;
+  className?: string;
 };
 
 const Dropdown: React.FC<Props> = ({
@@ -26,6 +27,7 @@ const Dropdown: React.FC<Props> = ({
   type = "primary",
   items,
   onClick,
+  className = "",
 }) => {
   const container = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState<boolean>(false);
@@ -51,7 +53,7 @@ const Dropdown: React.FC<Props> = ({
   }, []);
 
   return (
-    <div className={styles.dropdown} ref={container}>
+    <div className={`${styles.dropdown} ${className}`} ref={container}>
       <Button
         size={size}
         type={type}

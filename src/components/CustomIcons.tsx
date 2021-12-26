@@ -148,12 +148,12 @@ export const ForwardIcon = () => (
     <path
       d="M0.5 12.5V2.5L7.5 7.5L0.5 12.5Z"
       stroke="currentColor"
-      stroke-linejoin="round"
+      strokeLinejoin="round"
     />
     <path
       d="M7.5 12.5V2.5L14.5 7.5L7.5 12.5Z"
       stroke="currentColor"
-      stroke-linejoin="round"
+      strokeLinejoin="round"
     />
   </svg>
 );
@@ -235,8 +235,8 @@ export const StarIcon = () => (
     <path
       d="M7.5 12.0405L3.17354 14.3151L4 9.4973L0.5 6.08562L5.33677 5.38324L7.5 1L9.66323 5.38324L14.5 6.08562L11 9.4973L11.8265 14.3151L7.5 12.0405Z"
       stroke="currentColor"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
   </svg>
 );
@@ -265,12 +265,12 @@ export const RewindIcon = () => (
     <path
       d="M14.5 12.5V2.5L7.5 7.5L14.5 12.5Z"
       stroke="currentColor"
-      stroke-linejoin="round"
+      strokeLinejoin="round"
     />
     <path
       d="M7.5 12.5V2.5L0.5 7.5L7.5 12.5Z"
       stroke="currentColor"
-      stroke-linejoin="round"
+      strokeLinejoin="round"
     />
   </svg>
 );
@@ -299,7 +299,7 @@ export const PlayIcon = () => (
     <path
       d="M4.5 12.5V2.5L11.5 7.5L4.5 12.5Z"
       stroke="currentColor"
-      stroke-linejoin="round"
+      strokeLinejoin="round"
     />
   </svg>
 );
@@ -351,20 +351,20 @@ export const CogIcon = () => (
     xmlns="http://www.w3.org/2000/svg"
   >
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M5.944 0.5L5.858 0.936707L5.52901 2.53467C5.00301 2.73554 4.526 3.02037 4.095 3.35815L2.487 2.8205L2.05501 2.68658L1.83101 3.07233L0.723999 4.9231L0.5 5.3089L0.828003 5.5957L2.07201 6.65399C2.02701 6.93081 1.96901 7.20461 1.96901 7.49542C1.96901 7.78623 2.02701 8.0601 2.07201 8.33691L0.828003 9.3952L0.5 9.68201L0.723999 10.0677L1.83101 11.9186L2.05501 12.3053L2.487 12.1704L4.095 11.6328C4.526 11.9705 5.00301 12.2553 5.52901 12.4562L5.858 14.0541L5.944 14.4909H9.05501L9.142 14.0541L9.47 12.4562C9.996 12.2553 10.473 11.9705 10.904 11.6328L12.512 12.1704L12.944 12.3053L13.169 11.9186L14.275 10.0677L14.5 9.68201L14.171 9.3952L12.927 8.33691C12.973 8.0601 13.03 7.78623 13.03 7.49542C13.03 7.20461 12.973 6.93081 12.927 6.65399L14.171 5.5957L14.5 5.3089L14.275 4.9231L13.169 3.07233L12.944 2.68658L12.512 2.8205L10.904 3.35815C10.473 3.02037 9.996 2.73554 9.47 2.53467L9.142 0.936707L9.05501 0.5H5.944Z"
       stroke="currentColor"
-      stroke-linecap="square"
-      stroke-linejoin="round"
+      strokeLinecap="square"
+      strokeLinejoin="round"
     />
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M9.49963 7.49542C9.49963 8.5987 8.60363 9.49414 7.49963 9.49414C6.39563 9.49414 5.49963 8.5987 5.49963 7.49542C5.49963 6.39214 6.39563 5.49677 7.49963 5.49677C8.60363 5.49677 9.49963 6.39214 9.49963 7.49542Z"
       stroke="currentColor"
-      stroke-linecap="square"
-      stroke-linejoin="round"
+      strokeLinecap="square"
+      strokeLinejoin="round"
     />
   </svg>
 );
@@ -407,7 +407,7 @@ export const SunIcon = () => (
     <path
       d="M7.5 1.49933V0.5M7.5 14.4908V13.4915M13.5 7.49542H14.5M1.5 7.49542H0.5M2.5 2.49866L1.5 1.49933M13.5 1.49933L12.5 2.49866M2.5 12.4921L1.5 13.4915M13.5 13.4915L12.5 12.4921M10.5 7.49542C10.5 9.15134 9.157 10.4935 7.5 10.4935C5.843 10.4935 4.5 9.15134 4.5 7.49542C4.5 5.8395 5.843 4.49738 7.5 4.49738C9.157 4.49738 10.5 5.8395 10.5 7.49542Z"
       stroke="currentColor"
-      stroke-linecap="square"
+      strokeLinecap="square"
     />
   </svg>
 );
@@ -434,18 +434,18 @@ export const PinIcon = () => (
     xmlns="http://www.w3.org/2000/svg"
   >
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M7.5 8.49478C8.604 8.49478 9.5 7.59934 9.5 6.49606C9.5 5.39278 8.604 4.49738 7.5 4.49738C6.396 4.49738 5.5 5.39278 5.5 6.49606C5.5 7.59934 6.396 8.49478 7.5 8.49478Z"
       stroke="currentColor"
-      stroke-linecap="square"
+      strokeLinecap="square"
     />
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M13.5 6.49606C13.5 11.4928 8.5 14.4909 7.5 14.4909C6.5 14.4909 1.5 11.4928 1.5 6.49606C1.5 3.18522 4.187 0.5 7.5 0.5C10.813 0.5 13.5 3.18522 13.5 6.49606Z"
       stroke="currentColor"
-      stroke-linecap="square"
+      strokeLinecap="square"
     />
   </svg>
 );
@@ -474,7 +474,7 @@ export const MoonIcon = () => (
     <path
       d="M1.6608 11.3619C2.09299 11.4524 2.54096 11.5 3.00005 11.5C6.5899 11.5 9.50005 8.58987 9.50005 5.00002C9.50005 3.25482 8.81228 1.67027 7.69298 0.502625C11.4698 0.604839 14.5 3.69855 14.5 7.50002C14.5 11.366 11.366 14.5 7.50002 14.5C5.06141 14.5 2.91404 13.253 1.6608 11.3619Z"
       stroke="currentColor"
-      stroke-linejoin="round"
+      strokeLinejoin="round"
     />
   </svg>
 );
@@ -532,7 +532,7 @@ export const AirPlayIcon = () => (
     <path
       d="M3 11.5H0.5V1.5H14.5V11.5H12M7.5 9.5L3.5 13.5H11.5L7.5 9.5Z"
       stroke="currentColor"
-      stroke-linejoin="round"
+      strokeLinejoin="round"
     />
   </svg>
 );
@@ -630,6 +630,20 @@ export const UploadIcon = () => (
   >
     <path
       d="M8 2C6.168 2 4.574 3.273 4.133 5.023c-1.078.16-1.934 1.02-2.102 2.137A3.01 3.01 0 000 10c0 1.652 1.348 3 3 3h10c1.652 0 3-1.348 3-3 0-.898-.398-1.738-1.086-2.305.059-.23.086-.465.086-.695 0-1.82-1.613-3.305-3.508-2.953A3.998 3.998 0 008 2zm0 1c1.207 0 2.293.719 2.766 1.828l.175.43.438-.149c.226-.074.43-.109.621-.109 1.102 0 2 .898 2 2 0 .234-.047.473-.14.71l-.141.384.344.219c.585.37.937 1 .937 1.687 0 1.102-.898 2-2 2H3c-1.102 0-2-.898-2-2 0-.95.676-1.773 1.602-1.96l.41-.118L3 7.5c0-.828.672-1.5 1.45-1.504l.073-.496.028.508h.433l.063-.434A3 3 0 018 3zm.5 2.5L6 8h2v3h1V8h2z"
+      fill="currentColor"
+    ></path>
+  </svg>
+);
+
+export const FolderIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    className="icon"
+    viewBox="0 0 16 16"
+  >
+    <path
+      d="M2.5 2C1.676 2 1 2.676 1 3.5v9c0 .824.676 1.5 1.5 1.5h11c.824 0 1.5-.676 1.5-1.5v-7c0-.824-.676-1.5-1.5-1.5H6.797l-.652-1.21A1.496 1.496 0 004.825 2zm0 1h2.324c.184 0 .352.102.442.262L5.664 4H2v-.5c0-.281.219-.5.5-.5zM2 5h11.5c.281 0 .5.219.5.5v7c0 .281-.219.5-.5.5h-11a.494.494 0 01-.5-.5z"
       fill="currentColor"
     ></path>
   </svg>

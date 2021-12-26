@@ -1,3 +1,2 @@
-UI:
-    []. Improve timestamps design
-    []. add time calculator for text length and make shure to not exede 15 secs
+[].refactor
+[]. vendos title, dhe categori kur te krijosh 

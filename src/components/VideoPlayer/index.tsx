@@ -6,9 +6,10 @@ import styles from "@styles/components/VideoPlayer/index.module.scss";
 
 type Props = {
   video: string;
+  setVideo: React.Dispatch<React.SetStateAction<string | undefined>>;
 };
 
-const Player: React.FC<Props> = ({ video }) => {
+const Player: React.FC<Props> = ({ video, setVideo }) => {
   const videoEl = useRef<HTMLVideoElement>(null);
   const playerEl = useRef<HTMLDivElement>(null);
   const [settings, setSettings] = useState<boolean>(false);
@@ -81,6 +82,7 @@ const Player: React.FC<Props> = ({ video }) => {
         settings={settings}
         setSettings={setSettings}
         visible={mouseMove}
+        setVideo={setVideo}
       />
     </div>
   );

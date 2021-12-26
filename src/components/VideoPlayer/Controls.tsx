@@ -5,9 +5,9 @@ import moment from "moment";
 import { TimeStamp as TimeStampType } from "@interface/movie";
 
 import { CogIcon, ExpandIcon, MinimizeIcon } from "@icon";
-import TimeStamp from "./Timestamp";
+import TimeStamp from "./Timestamp/index";
 import Progress from "./Progress";
-import Settings from "./Settings";
+import Settings from "./Settings/index";
 
 import styles from "@styles/components/VideoPlayer/controls.module.scss";
 import Subtitle from "./Subtitle";
@@ -21,6 +21,7 @@ type Props = {
   settings: boolean;
   setSettings: React.Dispatch<React.SetStateAction<boolean>>;
   visible: boolean;
+  setVideo: React.Dispatch<React.SetStateAction<string | undefined>>;
 };
 
 const Controls: React.FC<Props> = ({
@@ -32,6 +33,7 @@ const Controls: React.FC<Props> = ({
   settings,
   setSettings,
   visible,
+  setVideo,
 }) => {
   const [addStamp, setAddStamp] = useState<TimeStampType>({
     text: "",
@@ -49,26 +51,41 @@ const Controls: React.FC<Props> = ({
 
     if (!video) return;
 
-    if (key === "ArrowLeft") {
-      video.currentTime -= 5;
-      if (video.currentTime < 0) {
-        video.pause();
-        video.currentTime = 0;
-      }
-    } else if (key === "ArrowRight") {
-      video.currentTime += 5;
-      if (video.currentTime > video.duration) {
-        video.pause();
-        video.currentTime = 0;
-      }
-    } else if (key === "Space") {
-      if (video.paused || video.ended) {
-        video.play();
-        setViewTimestamp(false);
-        setSettings(false);
-      } else {
-        video.pause();
-      }
+    console.log(key);
+
+    switch (key) {
+      case "ArrowLeft":
+        video.currentTime -= 5;
+        if (video.currentTime < 0) {
+          video.pause();
+          video.currentTime = 0;
+        }
+        break;
+
+      case "ArrowRight":
+        video.currentTime += 5;
+        if (video.currentTime > video.duration) {
+          video.pause();
+          video.currentTime = 0;
+        }
+        break;
+
+      case "Space":
+        if (video.paused || video.ended) {
+          video.play();
+          setViewTimestamp(false);
+          setSettings(false);
+        } else {
+          video.pause();
+        }
+        break;
+
+      case "Escape":
+        setVideo(undefined);
+        break;
+
+      default:
+        break;
     }
   };
 
@@ -175,6 +192,8 @@ const Controls: React.FC<Props> = ({
         visible={viewTimestamp}
         videoPath={videoPath}
         currentTime={currentTime}
+        setSettings={setSettings}
+        setViewTimestamp={setViewTimestamp}
       />
     </div>
   );

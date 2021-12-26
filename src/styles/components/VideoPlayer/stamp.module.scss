@@ -5,20 +5,12 @@
   column-gap: 10px;
 
   textarea {
-    // max-height: 50px;
-    // border: 1px solid var(--gray-10);
     width: 100%;
     max-width: unset;
     min-width: unset;
-    border-radius: var(--border-radius);
   }
 
   input {
     max-width: 75px;
-    border-radius: var(--border-radius);
-  }
-
-  button {
-    border-radius: var(--border-radius);
   }
 }

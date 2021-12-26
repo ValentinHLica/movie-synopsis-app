@@ -1,0 +1,23 @@
+.timestamps {
+  display: flex;
+  flex-direction: column;
+
+  li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--gray-9);
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    h3 {
+      color: var(--gray-6);
+      font-size: 12px;
+    }
+  }
+}
+
+h4 {
+  text-align: center;
+  padding: 20px 0;
+}

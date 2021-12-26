@@ -57,7 +57,7 @@ const EditorPage: React.FC = () => {
       {!video ? (
         <DropBox onClick={onClick} onDrop={onDrop} onDragOver={onDragOver} />
       ) : (
-        <VideoPlayer video={video} />
+        <VideoPlayer video={video} setVideo={setVideo} />
       )}
     </div>
   );

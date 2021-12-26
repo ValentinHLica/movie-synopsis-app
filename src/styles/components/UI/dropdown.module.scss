@@ -12,7 +12,7 @@
     background-color: var(--gray-11);
     border: 1px solid var(--gray-8);
     color: var(--gray-9);
-    border-radius: 4px;
+    border-radius: var(--border-radius);
     visibility: hidden;
     opacity: 0;
     transition: visibility 0.2s ease, opacity 0.2s ease;
@@ -40,11 +40,11 @@
       }
 
       &:first-child {
-        border-radius: 4px 4px 0 0;
+        border-radius: var(--border-radius) var(--border-radius) 0 0;
       }
 
       &:last-child {
-        border-radius: 0 0 4px 4px;
+        border-radius: 0 0 var(--border-radius) var(--border-radius);
         border-bottom: none;
       }
 
