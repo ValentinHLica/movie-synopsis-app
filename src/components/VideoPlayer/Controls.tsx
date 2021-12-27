@@ -1,57 +1,42 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import moment from "moment";
 
-import { TimeStamp as TimeStampType } from "@interface/movie";
-
+import Context from "@components/Context";
 import { CogIcon, ExpandIcon, MinimizeIcon } from "@icon";
 import TimeStamp from "./Timestamp/index";
 import Progress from "./Progress";
 import Settings from "./Settings/index";
-
-import styles from "@styles/components/VideoPlayer/controls.module.scss";
 import Subtitle from "./Subtitle";
 
-type Props = {
-  videoEl: React.RefObject<HTMLVideoElement>;
-  videoPath: string;
-  playerEl: React.RefObject<HTMLDivElement>;
-  viewTimestamp: boolean;
-  setViewTimestamp: React.Dispatch<React.SetStateAction<boolean>>;
-  settings: boolean;
-  setSettings: React.Dispatch<React.SetStateAction<boolean>>;
-  visible: boolean;
-  setVideo: React.Dispatch<React.SetStateAction<string | undefined>>;
-};
+import styles from "@styles/components/VideoPlayer/controls.module.scss";
 
-const Controls: React.FC<Props> = ({
-  videoEl,
-  videoPath,
-  playerEl,
-  viewTimestamp,
-  setViewTimestamp,
-  settings,
-  setSettings,
-  visible,
-  setVideo,
-}) => {
-  const [addStamp, setAddStamp] = useState<TimeStampType>({
-    text: "",
-    startTime: "",
-  });
-  const [timestamps, setTimestamps] = useState<TimeStampType[]>([]);
+const Controls: React.FC = () => {
+  const {
+    videoEl,
+    playerEl,
+    viewTimestamp,
+    setViewTimestamp,
+    settings,
+    setSettings,
+    mouseMove,
+    setVideoPath,
+    setAddStamp,
+    currentTime,
+    setCurrentTime,
+  } = useContext(Context);
+
   const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
-  const [currentTime, setCurrentTime] = useState<number>(0);
 
   const videoControl = (e: KeyboardEvent) => {
+    if (!(videoEl && videoEl.current)) return;
+
     const video = videoEl.current;
     const key = e.code;
 
     if (document.activeElement?.tagName !== "BODY") return;
 
     if (!video) return;
-
-    console.log(key);
 
     switch (key) {
       case "ArrowLeft":
@@ -81,7 +66,7 @@ const Controls: React.FC<Props> = ({
         break;
 
       case "Escape":
-        setVideo(undefined);
+        setVideoPath(null);
         break;
 
       default:
@@ -90,13 +75,13 @@ const Controls: React.FC<Props> = ({
   };
 
   const onTimeChange = () => {
-    if (videoEl.current) {
+    if (videoEl && videoEl.current) {
       setCurrentTime(videoEl.current.currentTime);
     }
   };
 
   const onExpand = () => {
-    if (playerEl.current) {
+    if (playerEl && playerEl.current) {
       const isInFullScreen =
         document.fullscreenElement && document.fullscreenElement !== null;
 
@@ -120,7 +105,7 @@ const Controls: React.FC<Props> = ({
       startTime: moment.utc(currentTime * 1000).format("HH:mm:ss"),
     }));
 
-    if (videoEl.current) {
+    if (videoEl && videoEl.current) {
       videoEl.current.pause();
     }
   };
@@ -132,7 +117,7 @@ const Controls: React.FC<Props> = ({
       setViewTimestamp(false);
     }
 
-    if (videoEl.current) {
+    if (videoEl && videoEl.current) {
       videoEl.current.pause();
     }
   };
@@ -142,18 +127,20 @@ const Controls: React.FC<Props> = ({
       ...prevState,
       startTime: moment.utc(currentTime * 1000).format("HH:mm:ss"),
     }));
+
+    // eslint-disable-next-line
   }, [currentTime]);
 
   useEffect(() => {
     window.onkeydown = videoControl;
 
-    if (videoEl.current) {
+    if (videoEl && videoEl.current) {
       videoEl.current.onkeydown = (e) => e.preventDefault();
 
       videoEl.current.addEventListener("timeupdate", onTimeChange);
     }
 
-    if (playerEl.current) {
+    if (playerEl && playerEl.current) {
       playerEl.current.onfullscreenchange = () =>
         setIsFullscreen((prevValue) => !prevValue);
     }
@@ -163,16 +150,16 @@ const Controls: React.FC<Props> = ({
   return (
     <div
       className={`${styles.controls} ${
-        visible ? styles.controls__visible : ""
+        mouseMove ? styles.controls__visible : ""
       }`}
     >
-      <Subtitle timestamps={timestamps} currentTime={currentTime} />
+      <Subtitle />
 
       <p className={styles.timer} onClick={timestampHandler}>
         {moment.utc(currentTime * 1000).format("HH:mm:ss")}
       </p>
 
-      <Progress videoEl={videoEl} />
+      <Progress />
 
       <div className={styles.expand} onClick={settingsHandler}>
         <CogIcon />
@@ -182,19 +169,9 @@ const Controls: React.FC<Props> = ({
         {!isFullscreen ? <ExpandIcon /> : <MinimizeIcon />}
       </div>
 
-      <Settings visible={settings} />
+      <Settings />
 
-      <TimeStamp
-        addStamp={addStamp}
-        setAddStamp={setAddStamp}
-        timestamps={timestamps}
-        setTimestamps={setTimestamps}
-        visible={viewTimestamp}
-        videoPath={videoPath}
-        currentTime={currentTime}
-        setSettings={setSettings}
-        setViewTimestamp={setViewTimestamp}
-      />
+      <TimeStamp />
     </div>
   );
 };

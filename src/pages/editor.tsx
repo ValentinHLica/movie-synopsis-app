@@ -1,15 +1,17 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
+
+import { File } from "@interface/editor";
 
 import VideoPlayer from "@components/VideoPlayer/index";
-import DropBox from "@components/UI/DropBox";
+import { DropBox } from "@ui";
+import Context from "@components/Context";
 
 import styles from "@styles/pages/editor.module.scss";
-import { File } from "@interface/editor";
 
 const { dialog } = window.require("@electron/remote");
 
 const EditorPage: React.FC = () => {
-  const [video, setVideo] = useState<string | undefined>(undefined);
+  const { videoPath, setVideoPath } = useContext(Context);
 
   const onDrop: React.DragEventHandler<HTMLDivElement> = (e) => {
     e.preventDefault();
@@ -27,7 +29,7 @@ const EditorPage: React.FC = () => {
 
         for (const type of allowedTypes) {
           if (file.type === type) {
-            setVideo(file.path);
+            setVideoPath(file.path);
           }
         }
       }
@@ -49,15 +51,15 @@ const EditorPage: React.FC = () => {
       ],
     });
 
-    setVideo(path.filePaths[0]);
+    setVideoPath(path.filePaths[0]);
   };
 
   return (
     <div className={styles.editor}>
-      {!video ? (
+      {!videoPath ? (
         <DropBox onClick={onClick} onDrop={onDrop} onDragOver={onDragOver} />
       ) : (
-        <VideoPlayer video={video} setVideo={setVideo} />
+        <VideoPlayer />
       )}
     </div>
   );

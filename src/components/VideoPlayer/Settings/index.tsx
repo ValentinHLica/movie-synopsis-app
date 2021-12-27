@@ -1,19 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import Voice from "./Voice";
 import Output from "./Output";
+import Context from "@components/Context";
 
 import styles from "@styles/components/VideoPlayer/Settings/settings.module.scss";
 
-type Props = {
-  visible: boolean;
-};
+const Settings: React.FC = () => {
+  const { settings } = useContext(Context);
 
-const Settings: React.FC<Props> = ({ visible }) => {
   return (
     <ul
       className={`${styles.settings} ${
-        !visible ? styles.settings__hidden : ""
+        !settings ? styles.settings__hidden : ""
       }`}
     >
       <li>

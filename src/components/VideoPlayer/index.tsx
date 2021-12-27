@@ -1,24 +1,26 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 
 import Controls from "./Controls";
+import Context from "@components/Context";
 
 import styles from "@styles/components/VideoPlayer/index.module.scss";
 
-type Props = {
-  video: string;
-  setVideo: React.Dispatch<React.SetStateAction<string | undefined>>;
-};
+const Player: React.FC = () => {
+  const {
+    videoPath,
+    videoEl,
+    playerEl,
+    setSettings,
+    viewTimestamp,
+    setViewTimestamp,
+    mouseMove,
+    setMouseMove,
+  } = useContext(Context);
 
-const Player: React.FC<Props> = ({ video, setVideo }) => {
-  const videoEl = useRef<HTMLVideoElement>(null);
-  const playerEl = useRef<HTMLDivElement>(null);
-  const [settings, setSettings] = useState<boolean>(false);
-  const [viewTimestamp, setViewTimestamp] = useState<boolean>(false);
-  const [mouseMove, setMouseMove] = useState<boolean>(false);
   const timeOut = useRef<NodeJS.Timeout>();
 
   const onVideoClick = () => {
-    if (videoEl.current) {
+    if (videoEl && videoEl.current) {
       const method = videoEl.current.paused ? "play" : "pause";
       videoEl.current[method]();
 
@@ -30,7 +32,7 @@ const Player: React.FC<Props> = ({ video, setVideo }) => {
   };
 
   const onDoubleClick = () => {
-    if (playerEl.current) {
+    if (playerEl && playerEl.current) {
       const isInFullScreen =
         document.fullscreenElement && document.fullscreenElement !== null;
 
@@ -57,7 +59,7 @@ const Player: React.FC<Props> = ({ video, setVideo }) => {
   };
 
   useEffect(() => {
-    if (playerEl.current) {
+    if (playerEl && playerEl.current) {
       playerEl.current.style.cursor = !mouseMove ? "none" : "pointer";
     }
   }, [mouseMove]);
@@ -65,7 +67,7 @@ const Player: React.FC<Props> = ({ video, setVideo }) => {
   return (
     <div className={styles.player} ref={playerEl} onMouseMove={onMouseMove}>
       <video
-        src={video}
+        src={videoPath as string}
         className={styles.video}
         ref={videoEl}
         autoPlay
@@ -73,17 +75,7 @@ const Player: React.FC<Props> = ({ video, setVideo }) => {
         onDoubleClick={onDoubleClick}
       />
 
-      <Controls
-        playerEl={playerEl}
-        videoEl={videoEl}
-        videoPath={video}
-        viewTimestamp={viewTimestamp}
-        setViewTimestamp={setViewTimestamp}
-        settings={settings}
-        setSettings={setSettings}
-        visible={mouseMove}
-        setVideo={setVideo}
-      />
+      <Controls />
     </div>
   );
 };

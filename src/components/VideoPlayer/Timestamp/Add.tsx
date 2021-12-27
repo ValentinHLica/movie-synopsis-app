@@ -1,24 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import moment from "moment";
 
-import { TimeStamp } from "@interface/movie";
-
 import Stamp from "../Stamp";
+import Context from "@components/Context";
 
-type Props = {
-  addStamp: TimeStamp;
-  setAddStamp: React.Dispatch<React.SetStateAction<TimeStamp>>;
-  currentTime: number;
-  setTimestamps: React.Dispatch<React.SetStateAction<TimeStamp[]>>;
-};
+const Add: React.FC = () => {
+  const { addStamp, setAddStamp, currentTime, setTimestamps } =
+    useContext(Context);
 
-const Add: React.FC<Props> = ({
-  addStamp,
-  setAddStamp,
-  currentTime,
-  setTimestamps,
-}) => {
   const onAdd = () => {
     if (addStamp.text !== "" && addStamp.startTime !== "") {
       setTimestamps((prevValue) => prevValue.concat(addStamp));

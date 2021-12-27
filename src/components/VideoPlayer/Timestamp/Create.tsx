@@ -1,29 +1,20 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 
 import dateFormat from "dateformat";
 
-import { TimeStamp } from "@interface/movie";
+import { Button, Input, Progress } from "@ui";
+import { SaveIcon } from "@icon";
+import Context from "@components/Context";
+
 import { createMovie } from "@utils/generation";
 import { categories } from "@data/movie";
 
-import { Button, Input, Progress } from "@ui";
-import { SaveIcon } from "@icon";
-
 import styles from "@styles/components/VideoPlayer/Timestamp/create.module.scss";
 
-type Props = {
-  videoPath: string;
-  timestamps: TimeStamp[];
-  setSettings: React.Dispatch<React.SetStateAction<boolean>>;
-  setViewTimestamp: React.Dispatch<React.SetStateAction<boolean>>;
-};
+const Create: React.FC = () => {
+  const { videoPath, timestamps, setSettings, setViewTimestamp } =
+    useContext(Context);
 
-const Create: React.FC<Props> = ({
-  videoPath,
-  timestamps,
-  setSettings,
-  setViewTimestamp,
-}) => {
   const startTime = useRef<Date>(new Date());
   const movieTitle = useRef<HTMLInputElement>(null);
   const [currentTimer, setCurrentTimer] = useState<Date>(new Date());
@@ -65,7 +56,7 @@ const Create: React.FC<Props> = ({
 
       try {
         await createMovie({
-          videoPath,
+          videoPath: videoPath as string,
           timeStamps: timestamps,
           exportPath,
           setProgress,

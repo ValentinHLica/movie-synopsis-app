@@ -1,17 +1,13 @@
-import React from "react";
-
-import { TimeStamp } from "@interface/movie";
+import React, { useContext } from "react";
 
 import Stamp from "../Stamp";
+import Context from "@components/Context";
 
 import styles from "@styles/components/VideoPlayer/Timestamp/timestamps.module.scss";
 
-type Props = {
-  timestamps: TimeStamp[];
-  setTimestamps: React.Dispatch<React.SetStateAction<TimeStamp[]>>;
-};
+const Timestamps: React.FC = () => {
+  const { timestamps, setTimestamps } = useContext(Context);
 
-const Timestamps: React.FC<Props> = ({ timestamps, setTimestamps }) => {
   if (timestamps.length > 0) {
     const onChange = (
       value: string,

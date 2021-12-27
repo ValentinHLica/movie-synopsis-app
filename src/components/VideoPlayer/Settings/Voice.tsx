@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 
 import { Button, Dropdown, TextArea } from "@ui";
 import { SoundOnIcon } from "@icon";
+
 import { getVoices, listenVoice } from "@utils/helpers";
 
 import styles from "@styles/components/VideoPlayer/Settings/voice.module.scss";
