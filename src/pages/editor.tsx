@@ -4,7 +4,7 @@ import { File } from "@interface/editor";
 
 import VideoPlayer from "@components/VideoPlayer/index";
 import { DropBox } from "@ui";
-import Context from "@components/Context";
+import Context from "@context";
 
 import styles from "@styles/pages/editor.module.scss";
 

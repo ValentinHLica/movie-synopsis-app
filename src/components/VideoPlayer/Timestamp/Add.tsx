@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 import moment from "moment";
 
 import Stamp from "../Stamp";
-import Context from "@components/Context";
+import Context from "@context";
 
 const Add: React.FC = () => {
   const { addStamp, setAddStamp, currentTime, setTimestamps } =

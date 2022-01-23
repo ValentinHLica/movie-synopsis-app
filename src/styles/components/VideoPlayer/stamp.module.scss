@@ -1,16 +1,21 @@
 .stamp {
-  display: flex;
-  align-items: baseline;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: 1fr 100px;
   column-gap: 10px;
+  row-gap: 10px;
 
   textarea {
     width: 100%;
     max-width: unset;
     min-width: unset;
+    grid-row: 1/3;
   }
 
   input {
-    max-width: 75px;
+    text-align: center;
+  }
+
+  button {
+    grid-column: 2/3;
   }
 }

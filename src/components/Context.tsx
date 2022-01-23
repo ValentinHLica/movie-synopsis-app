@@ -19,6 +19,8 @@ interface State {
   setTimestamps: React.Dispatch<React.SetStateAction<TimeStamp[]>>;
   currentTime: number;
   setCurrentTime: React.Dispatch<React.SetStateAction<number>>;
+  customAudio: boolean;
+  setCustomAudio: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const Context = createContext<State>({
@@ -41,6 +43,8 @@ const Context = createContext<State>({
   setTimestamps: (arg) => null,
   currentTime: 0,
   setCurrentTime: (arg) => null,
+  customAudio: false,
+  setCustomAudio: (arg) => null,
 });
 
 export const ContextProvider: React.FC = ({ children }) => {
@@ -56,6 +60,7 @@ export const ContextProvider: React.FC = ({ children }) => {
   });
   const [timestamps, setTimestamps] = useState<TimeStamp[]>([]);
   const [currentTime, setCurrentTime] = useState<number>(0);
+  const [customAudio, setCustomAudio] = useState<boolean>(false);
 
   const context = {
     videoPath,
@@ -74,6 +79,8 @@ export const ContextProvider: React.FC = ({ children }) => {
     setTimestamps,
     currentTime,
     setCurrentTime,
+    customAudio,
+    setCustomAudio,
   };
 
   return <Context.Provider value={context}>{children}</Context.Provider>;

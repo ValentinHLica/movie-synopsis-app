@@ -1,12 +1,11 @@
 .controls {
+  display: flex;
+  flex-direction: column;
   position: absolute;
   right: 0;
   bottom: 0;
   left: 0;
-  margin: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  margin: 0 12px;
   column-gap: 10px;
   visibility: hidden;
   opacity: 0;
@@ -17,20 +16,37 @@
     opacity: 1;
   }
 
-  .timer {
-    color: white;
-    font-size: 12px;
-    align-self: center;
-    cursor: pointer;
-  }
+  .content {
+    display: flex;
+    align-items: center;
 
-  .expand {
-    color: white;
-    cursor: pointer;
+    li {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      color: white;
+      opacity: 0.8;
+      transition: opacity 0.3s ease;
+      cursor: pointer;
+      font-size: 30px;
 
-    svg {
-      height: 12px;
-      width: 12px;
+      &:hover {
+        opacity: 1;
+      }
+
+      &.content__time {
+        margin-right: auto;
+        width: fit-content;
+        font-size: 13px;
+      }
+
+      &.settings {
+        svg {
+          font-size: 0.8em;
+        }
+      }
     }
   }
 }

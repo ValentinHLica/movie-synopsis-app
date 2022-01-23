@@ -1,11 +1,12 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 
-import Context from "@components/Context";
+import Context from "@context";
 
 import styles from "@styles/components/VideoPlayer/progress.module.scss";
 
 const Progress: React.FC = () => {
   const { videoEl } = useContext(Context);
+
   const progressEl = useRef<HTMLDivElement>(null);
   const [progress, setProgress] = useState<number>(0);
 

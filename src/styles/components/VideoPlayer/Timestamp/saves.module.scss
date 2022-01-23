@@ -1,0 +1,57 @@
+.saves {
+  overflow-y: scroll;
+  padding-right: 10px;
+
+  .saves__list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 10px;
+    row-gap: 10px;
+
+    .save__item {
+      user-select: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      flex-direction: column;
+      border: 1px solid var(--gray-6);
+      border-radius: var(--border-radius);
+      padding: 5px;
+      cursor: pointer;
+      transition: border-color 0.3s ease, background-color 0.3s ease;
+
+      &:hover {
+        background-color: var(--main-red);
+        border-color: var(--gray-1);
+      }
+
+      .remove {
+        align-self: flex-end;
+        transition: color 0.3s ease;
+
+        &:hover {
+          color: var(--gray-1);
+        }
+      }
+
+      .item__details {
+        font-size: 12px;
+
+        svg {
+          font-size: 1.5em;
+        }
+
+        h3 {
+          margin-bottom: 10px;
+        }
+
+        h4 {
+          opacity: 0.7;
+          font-weight: 400;
+          padding: 0;
+        }
+      }
+    }
+  }
+}

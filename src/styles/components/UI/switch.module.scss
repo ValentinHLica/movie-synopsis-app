@@ -1,0 +1,27 @@
+.switch {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  max-width: 30px;
+  border-radius: 30px;
+  background-color: var(--gray-3);
+  border: 1px solid var(--gray-1);
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+
+  &__on {
+    background-color: var(--main-red);
+
+    .switch__button {
+      transform: translateX(calc(100% - 2px));
+    }
+  }
+
+  .switch__button {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: white;
+    transition: transform 0.3s ease;
+  }
+}

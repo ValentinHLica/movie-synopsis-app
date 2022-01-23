@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 
 import moment from "moment";
 
-import Context from "@components/Context";
+import Context from "@context";
 
 import styles from "@styles/components/VideoPlayer/subtitle.module.scss";
 

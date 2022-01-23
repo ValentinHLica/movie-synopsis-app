@@ -3,7 +3,7 @@ import { join } from "path";
 import { tempPath, renderPath, cliPath } from "@config/paths";
 
 import { copyFolderRecursiveSync, logger } from "@utils/helpers";
-import { TimeStamp } from "@interface/movie";
+import { MovieData, TimeStamp } from "@interface/movie";
 
 const { execFile } = window.require("child_process");
 const { writeFileSync, existsSync, mkdirSync } = window.require("fs");
@@ -14,9 +14,10 @@ type CreateVideo = (args: {
   exportPath: string;
   setProgress: React.Dispatch<React.SetStateAction<number>>;
   setTotalProgress: React.Dispatch<React.SetStateAction<number>>;
-  voice: string;
+  voice: string | null;
   title: string;
   categories: string[];
+  customAudio: "audio" | "video" | null;
 }) => Promise<any>;
 
 /**
@@ -34,6 +35,7 @@ export const createMovie: CreateVideo = async ({
   voice,
   title,
   categories,
+  customAudio,
 }) => {
   try {
     if (!existsSync(tempPath)) {
@@ -42,23 +44,40 @@ export const createMovie: CreateVideo = async ({
 
     copyFolderRecursiveSync(cliPath, tempPath);
 
-    const postPath = join(tempPath, "movie.json");
+    const movieConfigPath = join(tempPath, "movie.json");
 
-    writeFileSync(
-      postPath,
-      JSON.stringify({
-        moviePath: videoPath,
-        timeStamps,
-        exportPath,
-        title,
-        categories,
-      })
-    );
+    const intro = localStorage.getItem("intro");
+    const outro = localStorage.getItem("outro");
+    const outroImage = localStorage.getItem("outro-image");
+    const ffmpeg = localStorage.getItem("ffmpeg");
+    const ffprobe = localStorage.getItem("ffprobe");
+    const balcon = localStorage.getItem("balcon");
+
+    const movieConfig: MovieData = {
+      moviePath: videoPath,
+      timeStamps,
+      exportPath,
+      title,
+      categories,
+      voice,
+      cli: {
+        ffmpeg: ffmpeg && ffmpeg !== "" ? ffmpeg : null,
+        ffprobe: ffprobe && ffprobe !== "" ? ffprobe : null,
+        balcon: balcon && balcon !== "" ? balcon : null,
+      },
+      audioTrimDuration: 0.8,
+      customAudio,
+      intro: intro && intro !== "" ? intro : null,
+      outro: outro && outro !== "" ? outro : null,
+      outroImage: outroImage && outroImage !== "" ? outroImage : null,
+    };
+
+    writeFileSync(movieConfigPath, JSON.stringify(movieConfig));
 
     return new Promise(async (resolve) => {
       logger("Rendering Video", "action");
 
-      const args = [`MOVIE=${postPath}`, `VOICE=${voice}`];
+      const args = [`MOVIE=${movieConfigPath}`];
 
       await execFile(renderPath, args, (error: any, stdout: string) => {
         if (error) {

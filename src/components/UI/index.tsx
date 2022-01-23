@@ -6,5 +6,16 @@ import Dropdown from "./Dropdown";
 import TextArea from "./TextArea";
 import Tabs from "./Tabs";
 import DropBox from "./DropBox";
+import Switch from "./Switch";
 
-export { Button, Spinner, Input, Progress, Dropdown, TextArea, Tabs, DropBox };
+export {
+  Button,
+  Spinner,
+  Input,
+  Progress,
+  Dropdown,
+  TextArea,
+  Tabs,
+  DropBox,
+  Switch,
+};

@@ -1,10 +1,11 @@
 import React, { useContext } from "react";
 
 import { Tabs } from "@ui";
+import Context from "@context";
 import Create from "./Create";
 import Timestamps from "./Timestamps";
 import Add from "./Add";
-import Context from "@components/Context";
+import Saves from "./Saves";
 
 import styles from "@styles/components/VideoPlayer/Timestamp/index.module.scss";
 
@@ -30,6 +31,10 @@ const Timestamp: React.FC = () => {
           {
             text: "Create",
             content: <Create />,
+          },
+          {
+            text: "Saves",
+            content: <Saves />,
           },
         ]}
       />

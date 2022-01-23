@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import Editor from "@pages/editor";
-import { ContextProvider } from "@components/Context";
+import { ContextProvider } from "@context";
 
 import "./styles/main.scss";
 

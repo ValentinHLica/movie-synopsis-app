@@ -1,0 +1,53 @@
+.settings {
+  position: absolute;
+  bottom: 65px;
+  right: 0;
+  height: 40vh;
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+  background-color: var(--main-gray);
+  color: white;
+  padding: 10px;
+  visibility: visible;
+  opacity: 1;
+  transition: visibility 0.3s ease, opacity 0.3s ease;
+  border-radius: var(--border-radius);
+  cursor: auto !important;
+  overflow-y: scroll;
+
+  &__hidden {
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  li {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+    font-size: 15px;
+
+    h5 {
+      width: 90px;
+    }
+
+    input {
+      flex: 1;
+      width: 100%;
+    }
+
+    div {
+      display: flex;
+      align-items: center;
+      font-size: 15px;
+      column-gap: 10px;
+      width: 100%;
+
+      div {
+        width: fit-content;
+        max-width: 200px;
+      }
+    }
+  }
+}

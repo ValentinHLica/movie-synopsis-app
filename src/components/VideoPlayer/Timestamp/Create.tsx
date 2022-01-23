@@ -3,8 +3,8 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import dateFormat from "dateformat";
 
 import { Button, Input, Progress } from "@ui";
-import { SaveIcon } from "@icon";
-import Context from "@components/Context";
+import { MovieIcon, AudioVizIcon } from "@icon";
+import Context from "@context";
 
 import { createMovie } from "@utils/generation";
 import { categories } from "@data/movie";
@@ -12,11 +12,11 @@ import { categories } from "@data/movie";
 import styles from "@styles/components/VideoPlayer/Timestamp/create.module.scss";
 
 const Create: React.FC = () => {
-  const { videoPath, timestamps, setSettings, setViewTimestamp } =
+  const { videoPath, timestamps, setSettings, setViewTimestamp, customAudio } =
     useContext(Context);
 
   const startTime = useRef<Date>(new Date());
-  const movieTitle = useRef<HTMLInputElement>(null);
+  const [movieTitle, setMovieTitle] = useState<string>("");
   const [currentTimer, setCurrentTimer] = useState<Date>(new Date());
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
@@ -25,6 +25,7 @@ const Create: React.FC = () => {
   const [categoriesList, setCategoriesList] = useState<
     { name: string; selected: boolean }[]
   >(categories.map((e) => ({ name: e, selected: false })));
+  const [createVideoStep, setCreateVideoStep] = useState<boolean>(false);
 
   const onChangeCategories = (index: number) => {
     setCategoriesList((prevState) =>
@@ -45,14 +46,20 @@ const Create: React.FC = () => {
     const exportPath = localStorage.getItem("output-path");
     const voice = localStorage.getItem("voice");
 
-    if (
-      exportPath &&
-      exportPath !== "" &&
-      voice &&
-      voice !== "" &&
-      movieTitle.current
-    ) {
+    if (exportPath && exportPath !== "" && movieTitle) {
       setLoading(true);
+
+      let customAudioStep: "audio" | "video" | null = null;
+
+      if (customAudio) {
+        if (!createVideoStep) {
+          customAudioStep = "audio";
+          setCreateVideoStep(true);
+        } else {
+          customAudioStep = "video";
+          setCreateVideoStep(false);
+        }
+      }
 
       try {
         await createMovie({
@@ -62,10 +69,11 @@ const Create: React.FC = () => {
           setProgress,
           setTotalProgress,
           voice,
-          title: movieTitle.current.value,
+          title: movieTitle,
           categories: categoriesList
             .filter((e) => e.selected)
             .map((e) => e.name),
+          customAudio: customAudioStep,
         });
       } catch (error) {
         setError(true);
@@ -96,7 +104,12 @@ const Create: React.FC = () => {
         <form className={styles.form}>
           <div className={styles.form__item}>
             <h5>Title:</h5>
-            <Input placeholder="Movie title..." inputRef={movieTitle} />
+            <Input
+              placeholder="Movie title..."
+              onChange={(e) => {
+                setMovieTitle(e.target.value);
+              }}
+            />
           </div>
 
           <div className={styles.form__item}>
@@ -123,11 +136,17 @@ const Create: React.FC = () => {
             onClick={createVideo}
             className={styles.create_btn}
             loading={loading}
-            type={error ? "danger" : "warning"}
-            icon={<SaveIcon />}
+            type={
+              timestamps.length > 0 &&
+              movieTitle !== "" &&
+              categoriesList.filter((e) => e.selected).length > 0
+                ? "warning"
+                : "light"
+            }
+            icon={customAudio ? <AudioVizIcon /> : <MovieIcon />}
             disabled={timestamps.length === 0}
           >
-            Create Video
+            Create {customAudio ? "Audio" : "Video"}
           </Button>
         </form>
       ) : (
@@ -143,6 +162,8 @@ const Create: React.FC = () => {
           />
         </div>
       )}
+
+      {error && <h4>Error</h4>}
     </div>
   );
 };

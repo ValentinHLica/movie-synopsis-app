@@ -1,14 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 
-import { Button, Dropdown, TextArea } from "@ui";
-import { SoundOnIcon } from "@icon";
+import { Button, Dropdown, Input } from "@ui";
+import { HearAudioIcon } from "@icon";
 
 import { getVoices, listenVoice } from "@utils/helpers";
 
-import styles from "@styles/components/VideoPlayer/Settings/voice.module.scss";
-
 const VoiceChanger: React.FC = () => {
-  const textarea = useRef<HTMLTextAreaElement>(null);
+  const inputEl = useRef<HTMLInputElement>(null);
   const [selectedVoice, setSelectedVoice] = useState<string>("");
   const [voices, setVoices] = useState<string[]>([]);
 
@@ -43,35 +41,33 @@ const VoiceChanger: React.FC = () => {
   }, []);
 
   return (
-    <div className={styles.container}>
-      <div className={styles.wrapper}>
-        <Dropdown
-          size="sm"
-          type="light"
-          text={selectedVoice}
-          items={voices.map((voice) => {
-            return {
-              text: voice,
-              onClick: onVoiceChange.bind(this, voice),
-            };
-          })}
-          onClick={() => {
-            loadVoices();
-          }}
-        />
+    <div>
+      <Input placeholder="Enter text..." inputRef={inputEl} />
 
-        <Button
-          size="sm"
-          icon={<SoundOnIcon />}
-          onClick={() => {
-            listenVoice(textarea.current?.value);
-          }}
-        >
-          Speak
-        </Button>
-      </div>
+      <Dropdown
+        size="sm"
+        type="light"
+        text={selectedVoice}
+        items={voices.map((voice) => {
+          return {
+            text: voice,
+            onClick: onVoiceChange.bind(this, voice),
+          };
+        })}
+        onClick={() => {
+          loadVoices();
+        }}
+      />
 
-      <TextArea placeholder="Enter text..." elementRef={textarea} />
+      <Button
+        size="sm"
+        icon={<HearAudioIcon />}
+        onClick={() => {
+          listenVoice(inputEl.current?.value);
+        }}
+      >
+        Speak
+      </Button>
     </div>
   );
 };

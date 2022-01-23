@@ -35,16 +35,6 @@ const Button: React.FC<Props> = ({
     disabled,
   };
 
-  const content = children && (
-    <p
-      className={`${styles.children} ${
-        icon || loading ? styles.children_with_icon : ""
-      }`}
-    >
-      {children}
-    </p>
-  );
-
   return (
     <button
       {...attributes}
@@ -55,8 +45,10 @@ const Button: React.FC<Props> = ({
       }}
     >
       {loading && <Spinner size="sm" className={styles.container__loading} />}
+
       {!loading && icon}
-      {content}
+
+      {children}
     </button>
   );
 };

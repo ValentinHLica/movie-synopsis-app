@@ -1,13 +1,14 @@
 .timestamp {
   position: absolute;
-  bottom: 25px;
-  max-height: 40vh;
+  bottom: 65px;
+  max-height: 60vh;
   min-height: 100%;
-  width: 500px;
+  width: 400px;
   display: flex;
-  flex-direction: column;
-  overflow-y: scroll;
-  background-color: white;
+  flex-direction: column-reverse;
+  row-gap: 20px;
+  background-color: var(--main-gray);
+  color: white;
   padding: 10px;
   visibility: visible;
   opacity: 1;

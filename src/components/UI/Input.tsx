@@ -10,6 +10,7 @@ type Props = {
   value?: string | number;
   onChange?: ChangeEventHandler<HTMLInputElement>;
   invisible?: boolean;
+  className?: string;
 };
 
 const Input: React.FC<Props> = ({
@@ -20,11 +21,12 @@ const Input: React.FC<Props> = ({
   value,
   onChange,
   invisible,
+  className = "",
 }) => {
   const attributes = {
     className: `${styles.container} ${
       invisible ? styles.container__invisible : ""
-    } input`,
+    } input ${className}`,
     type,
     placeholder,
     ref: inputRef,

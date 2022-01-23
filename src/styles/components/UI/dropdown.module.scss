@@ -16,8 +16,8 @@
     visibility: hidden;
     opacity: 0;
     transition: visibility 0.2s ease, opacity 0.2s ease;
-    max-height: 200px;
-    overflow-y: auto;
+    max-height: 150px;
+    overflow-y: scroll;
 
     &__visible {
       visibility: visible;

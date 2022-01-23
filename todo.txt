@@ -1,2 +1,6 @@
-[].refactor
-[]. vendos title, dhe categori kur te krijosh 
+[]. implement manually adding voice audio file with balabloka ui
+[]. settings
+    []. custom intro, outro text 
+    []. cli routes
+    []. audio trim input
+[]. redesign

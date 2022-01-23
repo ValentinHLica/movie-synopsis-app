@@ -3,8 +3,6 @@ import React, { useEffect, useState } from "react";
 import { Button, Input } from "@ui";
 import { FolderIcon } from "@icon";
 
-import styles from "@styles/components/VideoPlayer/Settings/output.module.scss";
-
 const { dialog } = window.require("@electron/remote");
 const { existsSync } = window.require("fs");
 
@@ -49,7 +47,7 @@ const OutputVideo: React.FC = () => {
   }, []);
 
   return (
-    <div className={styles.container}>
+    <div>
       <Input readOnly placeholder={outputPath ?? "..."} />
 
       <Button onClick={updatePath} size="sm" icon={<FolderIcon />}>

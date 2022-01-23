@@ -1,7 +1,7 @@
 import React from "react";
 
+// import FileUploadIcon from "@mui/icons-material/FileUpload";
 import { UploadIcon } from "@icon";
-
 import styles from "@styles/components/UI/dropbox.module.scss";
 
 type Props = {

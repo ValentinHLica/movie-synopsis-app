@@ -2,8 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 
 import moment from "moment";
 
-import Context from "@components/Context";
-import { CogIcon, ExpandIcon, MinimizeIcon } from "@icon";
+import { SettingsIcon, FullScreenIcon, FullScreenExitIcon } from "@icon";
+import Context from "@context";
 import TimeStamp from "./Timestamp/index";
 import Progress from "./Progress";
 import Settings from "./Settings/index";
@@ -155,19 +155,21 @@ const Controls: React.FC = () => {
     >
       <Subtitle />
 
-      <p className={styles.timer} onClick={timestampHandler}>
-        {moment.utc(currentTime * 1000).format("HH:mm:ss")}
-      </p>
-
       <Progress />
 
-      <div className={styles.expand} onClick={settingsHandler}>
-        <CogIcon />
-      </div>
+      <ul className={styles.content}>
+        <li className={styles.content__time} onClick={timestampHandler}>
+          {moment.utc(currentTime * 1000).format("HH:mm:ss")}
+        </li>
 
-      <div className={styles.expand} onClick={onExpand}>
-        {!isFullscreen ? <ExpandIcon /> : <MinimizeIcon />}
-      </div>
+        <li className={styles.settings} onClick={settingsHandler}>
+          <SettingsIcon />
+        </li>
+
+        <li onClick={onExpand}>
+          {isFullscreen ? <FullScreenExitIcon /> : <FullScreenIcon />}
+        </li>
+      </ul>
 
       <Settings />
 

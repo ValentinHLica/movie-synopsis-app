@@ -25,22 +25,24 @@
           padding: 2px 4px;
           border-radius: var(--border-radius);
           background-color: var(--gray-11);
+          color: var(--gray-1);
           cursor: pointer;
+          transition: background-color 0.3s ease, color 0.3s ease;
 
           &.selected {
-            background-color: var(--green-3);
+            background-color: var(--main-red);
             color: white;
           }
         }
       }
     }
-  }
 
-  .create_btn {
-    text-align: center;
-    justify-content: flex-start;
-    border-radius: 3px;
-    width: fit-content;
+    .create_btn {
+      text-align: center;
+      justify-content: flex-start;
+      border-radius: 3px;
+      width: fit-content;
+    }
   }
 
   h5 {

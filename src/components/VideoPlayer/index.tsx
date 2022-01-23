@@ -1,7 +1,7 @@
-import React, { useContext, useEffect, useRef } from "react";
+import React, { useContext, useRef } from "react";
 
 import Controls from "./Controls";
-import Context from "@components/Context";
+import Context from "@context";
 
 import styles from "@styles/components/VideoPlayer/index.module.scss";
 
@@ -13,8 +13,8 @@ const Player: React.FC = () => {
     setSettings,
     viewTimestamp,
     setViewTimestamp,
-    mouseMove,
     setMouseMove,
+    settings,
   } = useContext(Context);
 
   const timeOut = useRef<NodeJS.Timeout>();
@@ -51,18 +51,12 @@ const Player: React.FC = () => {
       clearTimeout(timeOut.current);
     }
 
-    if (!viewTimestamp) {
+    if (!viewTimestamp && !settings) {
       timeOut.current = setTimeout(() => {
         setMouseMove(false);
       }, 2000);
     }
   };
-
-  useEffect(() => {
-    if (playerEl && playerEl.current) {
-      playerEl.current.style.cursor = !mouseMove ? "none" : "pointer";
-    }
-  }, [mouseMove]);
 
   return (
     <div className={styles.player} ref={playerEl} onMouseMove={onMouseMove}>

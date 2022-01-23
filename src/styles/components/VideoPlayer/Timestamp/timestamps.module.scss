@@ -1,18 +1,46 @@
 .timestamps {
-  display: flex;
-  flex-direction: column;
+  overflow-y: scroll;
+  max-height: 100%;
 
-  li {
-    padding: 10px 0;
-    border-bottom: 1px solid var(--gray-9);
+  .content {
+    margin-bottom: 10px;
 
-    &:last-child {
-      border-bottom: none;
-    }
+    .timestamp__item {
+      font-size: 14px;
+      // position: relative;
+      border-radius: var(--border-radius);
+      padding: 0 2px;
+      transition: background-color 0.2s ease, color 0.2s ease;
+      user-select: none;
 
-    h3 {
-      color: var(--gray-6);
-      font-size: 12px;
+      &:hover {
+        background-color: var(--main-red);
+        cursor: pointer;
+      }
+
+      &__current {
+        background-color: var(--main-red);
+      }
+
+      .item__controls {
+        position: absolute;
+        top: 0;
+        transform: translateX(calc(400px - 5px));
+        min-width: 400px;
+        background: var(--main-gray);
+        padding: 10px;
+        border-radius: var(--border-radius);
+        box-shadow: 0 0 5px 0px #00000085;
+        visibility: hidden;
+        opacity: 0;
+        transition: visibility 0.3s ease, opacity 0.3s ease;
+        z-index: 2;
+
+        &__visible {
+          visibility: visible;
+          opacity: 1;
+        }
+      }
     }
   }
 }
