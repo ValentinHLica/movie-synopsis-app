@@ -47,18 +47,18 @@ const Create: React.FC = () => {
     const voice = localStorage.getItem("voice");
 
     if (exportPath && exportPath !== "" && movieTitle) {
-      setLoading(true);
-
       let customAudioStep: "audio" | "video" | null = null;
 
       if (customAudio) {
         if (!createVideoStep) {
           customAudioStep = "audio";
-          setCreateVideoStep(true);
         } else {
           customAudioStep = "video";
-          setCreateVideoStep(false);
         }
+      }
+
+      if (!customAudioStep) {
+        setLoading(true);
       }
 
       try {
@@ -79,7 +79,13 @@ const Create: React.FC = () => {
         setError(true);
       }
 
-      setLoading(false);
+      if (customAudio) {
+        setCreateVideoStep(true);
+      }
+
+      if (!customAudioStep) {
+        setLoading(false);
+      }
     } else {
       setViewTimestamp(false);
       setSettings(true);
@@ -101,7 +107,7 @@ const Create: React.FC = () => {
   return (
     <div className={styles.create}>
       {!loading && progress === 0 ? (
-        <form className={styles.form}>
+        <form className={styles.form} onSubmit={(e) => e.preventDefault()}>
           <div className={styles.form__item}>
             <h5>Title:</h5>
             <Input
@@ -136,17 +142,18 @@ const Create: React.FC = () => {
             onClick={createVideo}
             className={styles.create_btn}
             loading={loading}
-            type={
-              timestamps.length > 0 &&
-              movieTitle !== "" &&
-              categoriesList.filter((e) => e.selected).length > 0
-                ? "warning"
-                : "light"
+            icon={
+              customAudio && !createVideoStep ? <AudioVizIcon /> : <MovieIcon />
             }
-            icon={customAudio ? <AudioVizIcon /> : <MovieIcon />}
-            disabled={timestamps.length === 0}
+            disabled={
+              !(
+                timestamps.length > 0 &&
+                movieTitle !== "" &&
+                categoriesList.filter((e) => e.selected).length > 0
+              )
+            }
           >
-            Create {customAudio ? "Audio" : "Video"}
+            Create {customAudio && !createVideoStep ? "Audio" : "Video"}
           </Button>
         </form>
       ) : (

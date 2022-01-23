@@ -16,6 +16,7 @@
 
   &[disabled] {
     cursor: not-allowed;
+    background-color: var(--gray-3);
   }
 
   svg {

@@ -1,8 +1,8 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef } from "react";
 
 import Voice from "./Voice";
 import Output from "./Output";
-import ContentText from "./ContentText";
+import CustomContent from "./CustomContent";
 import Cli from "./Cli";
 import Context from "@context";
 import { Switch } from "@ui";
@@ -13,19 +13,26 @@ import { useEffect } from "react";
 const Settings: React.FC = () => {
   const { settings, customAudio, setCustomAudio } = useContext(Context);
 
-  useEffect(() => {
-    localStorage.setItem("custom-audio", "on");
-  }, [customAudio]);
+  const firstLoad = useRef<boolean>(false);
 
   useEffect(() => {
-    const customAudioLocal = localStorage.getItem("custom-audio");
-
-    if (customAudioLocal && customAudioLocal === "on") {
-      setCustomAudio(true);
+    if (firstLoad.current) {
+      if (customAudio) {
+        localStorage.setItem("custom-audio", "on");
+        setCustomAudio(true);
+      } else {
+        localStorage.removeItem("custom-audio");
+        setCustomAudio(false);
+      }
+    } else {
+      const customAudioLocal = localStorage.getItem("custom-audio");
+      setCustomAudio(!!customAudioLocal);
     }
 
+    firstLoad.current = true;
+
     // eslint-disable-next-line
-  }, []);
+  }, [customAudio]);
 
   return (
     <ul
@@ -33,14 +40,14 @@ const Settings: React.FC = () => {
         !settings ? styles.settings__hidden : ""
       }`}
     >
-      <ContentText />
+      <CustomContent />
 
-      <li>
+      <li className={styles.switch}>
         <h5>Custom Audio</h5>
         <Switch state={customAudio} setState={setCustomAudio} />
       </li>
 
-      <li>
+      <li className={styles.voice}>
         <h5>Voice</h5>
         <Voice />
       </li>

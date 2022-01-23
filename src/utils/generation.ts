@@ -1,8 +1,8 @@
 import { join } from "path";
 
-import { tempPath, renderPath, cliPath } from "@config/paths";
+import { tempPath, renderPath } from "@config/paths";
 
-import { copyFolderRecursiveSync, logger } from "@utils/helpers";
+import { logger } from "@utils/helpers";
 import { MovieData, TimeStamp } from "@interface/movie";
 
 const { execFile } = window.require("child_process");
@@ -41,8 +41,6 @@ export const createMovie: CreateVideo = async ({
     if (!existsSync(tempPath)) {
       mkdirSync(tempPath);
     }
-
-    copyFolderRecursiveSync(cliPath, tempPath);
 
     const movieConfigPath = join(tempPath, "movie.json");
 
