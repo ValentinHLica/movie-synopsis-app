@@ -1,15 +1,15 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 
-import dateFormat from "dateformat";
-
 import { Button, Input, Progress } from "@ui";
 import { MovieIcon, AudioVizIcon } from "@icon";
 import Context from "@context";
 
 import { createMovie } from "@utils/generation";
 import { categories } from "@data/movie";
+import { tempPath } from "@config/paths";
 
 import styles from "@styles/components/VideoPlayer/Timestamp/create.module.scss";
+import moment from "moment";
 
 const Create: React.FC = () => {
   const { videoPath, timestamps, setSettings, setViewTimestamp, customAudio } =
@@ -52,12 +52,14 @@ const Create: React.FC = () => {
       if (customAudio) {
         if (!createVideoStep) {
           customAudioStep = "audio";
+
+          navigator.clipboard.writeText(tempPath);
         } else {
           customAudioStep = "video";
         }
       }
 
-      if (!customAudioStep) {
+      if (!customAudioStep || customAudioStep === "video") {
         setLoading(true);
       }
 
@@ -83,9 +85,7 @@ const Create: React.FC = () => {
         setCreateVideoStep(true);
       }
 
-      if (!customAudioStep) {
-        setLoading(false);
-      }
+      setLoading(false);
     } else {
       setViewTimestamp(false);
       setSettings(true);
@@ -158,10 +158,9 @@ const Create: React.FC = () => {
         </form>
       ) : (
         <div>
-          <h5>{`Elapsed Time: ${dateFormat(
-            currentTimer.getTime() - startTime.current.getTime(),
-            "MM:ss"
-          )}`}</h5>
+          <h5>{`Elapsed Time: ${moment
+            .utc(currentTimer.getTime() - startTime.current.getTime() * 1000)
+            .format("HH:mm:ss")}`}</h5>
 
           <Progress
             max={totalProgress}

@@ -10,8 +10,9 @@
 
     .form__item {
       h5 {
-        font-style: 14px;
-        margin-bottom: 5px;
+        font-size: 15px;
+        margin-bottom: 8px;
+        font-weight: 400;
       }
 
       .categories {
@@ -21,8 +22,8 @@
         column-gap: 5px;
 
         li {
-          font-size: 12px;
-          padding: 2px 4px;
+          font-size: 14px;
+          padding: 3px 5px;
           border-radius: var(--border-radius);
           background-color: var(--gray-11);
           color: var(--gray-1);

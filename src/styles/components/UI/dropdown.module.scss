@@ -3,15 +3,28 @@
 .dropdown {
   position: relative;
   width: fit-content;
+  column-gap: 0 !important;
+
+  .main__button {
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+  }
+
+  .menu__button {
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    font-size: 16px;
+    padding-right: 0px;
+    padding-left: 0px;
+  }
 
   .posts__controls {
     position: absolute;
     bottom: 0;
     right: 0;
     transform: translateY(calc(100% + 5px));
-    background-color: var(--gray-11);
+    background-color: var(--main-gray);
     border: 1px solid var(--gray-8);
-    color: var(--gray-9);
     border-radius: var(--border-radius);
     visibility: hidden;
     opacity: 0;
@@ -33,7 +46,7 @@
       align-items: center;
       justify-content: flex-start;
       min-width: 70px;
-      color: var(--gray-2);
+      color: white;
 
       svg {
         margin-right: 5px;
@@ -49,30 +62,14 @@
       }
 
       &:hover {
-        background-color: var(--gray-10);
+        background-color: var(--main-red);
       }
 
       &__selected {
-        background-color: var(--gray-9) !important;
+        background-color: var(--main-red) !important;
       }
 
-      &__sm {
-        padding: 5px 10px;
-
-        @include btn-small();
-      }
-
-      &__md {
-        padding: 8px 12px;
-
-        @include btn-medium();
-      }
-
-      &__lg {
-        padding: 10px 15px;
-
-        @include btn-large();
-      }
+      @include typography(14px, normal, 400, 16px, 0.02em, left);
     }
   }
 }

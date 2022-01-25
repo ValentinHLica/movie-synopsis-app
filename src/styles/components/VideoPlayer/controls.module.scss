@@ -5,7 +5,6 @@
   right: 0;
   bottom: 0;
   left: 0;
-  margin: 0 12px;
   column-gap: 10px;
   visibility: hidden;
   opacity: 0;
@@ -16,6 +15,10 @@
     opacity: 1;
   }
 
+  .progress {
+    margin: 0 10px;
+  }
+
   .content {
     display: flex;
     align-items: center;
@@ -24,25 +27,35 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 48px;
-      height: 48px;
+      width: 30px;
+      height: 30px;
       color: white;
       opacity: 0.8;
       transition: opacity 0.3s ease;
-      cursor: pointer;
       font-size: 30px;
+      margin: 8px;
 
       &:hover {
         opacity: 1;
       }
 
+      svg {
+        cursor: pointer;
+      }
+
       &.content__time {
-        margin-right: auto;
         width: fit-content;
-        font-size: 13px;
+        margin-bottom: 8px;
+        font-size: 15px;
+
+        span {
+          margin: 0 3px;
+        }
       }
 
       &.settings {
+        margin-left: auto;
+
         svg {
           font-size: 0.8em;
         }

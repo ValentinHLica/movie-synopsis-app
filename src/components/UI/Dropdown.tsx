@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 
-import Button from "./Button";
-
 import { Size, Type } from "@interface/UI/button";
 
+import Button from "./Button";
+import { DownArrowIcon } from "@icon";
 import styles from "@styles/components/UI/dropdown.module.scss";
 
 type Props = {
@@ -58,16 +58,21 @@ const Dropdown: React.FC<Props> = ({
         size={size}
         type={type}
         onClick={() => {
-          setVisible(true);
-
           if (onClick) {
             onClick();
           }
         }}
         icon={icon}
+        className={styles.main__button}
       >
         {text}
       </Button>
+
+      <Button
+        onClick={() => setVisible(true)}
+        className={styles.menu__button}
+        icon={<DownArrowIcon />}
+      />
 
       <ul
         className={`${styles.posts__controls} ${

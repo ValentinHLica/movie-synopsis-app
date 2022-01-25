@@ -10,12 +10,19 @@
     padding-bottom: 5px;
 
     .tab {
-      margin-right: 10px;
-      font-size: 12px;
+      margin-right: 15px;
+      font-size: 14px;
       padding-bottom: 5px;
       box-shadow: 0 2px transparent;
       transition: box-shadow 0.3s ease;
       cursor: pointer;
+      color: var(--gray-5);
+      display: flex;
+      align-items: center;
+
+      svg {
+        margin-right: 5px;
+      }
 
       &:last-child {
         margin-right: 0;
@@ -23,6 +30,7 @@
 
       &.tab__selected {
         box-shadow: 0 2px var(--gray-5);
+        color: white;
       }
     }
   }

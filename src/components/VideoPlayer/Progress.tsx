@@ -4,7 +4,11 @@ import Context from "@context";
 
 import styles from "@styles/components/VideoPlayer/progress.module.scss";
 
-const Progress: React.FC = () => {
+type Props = {
+  className?: string;
+};
+
+const Progress: React.FC<Props> = ({ className = "" }) => {
   const { videoEl } = useContext(Context);
 
   const progressEl = useRef<HTMLDivElement>(null);
@@ -34,13 +38,19 @@ const Progress: React.FC = () => {
   }, [videoEl]);
 
   return (
-    <div className={styles.progress} ref={progressEl} onClick={onClick}>
+    <div className={styles.container}>
       <div
-        className={styles.progress_bar}
-        style={{
-          flexBasis: `${progress}%`,
-        }}
-      />
+        className={`${styles.progress} ${className}`}
+        ref={progressEl}
+        onClick={onClick}
+      >
+        <div
+          className={styles.progress_bar}
+          style={{
+            flexBasis: `${progress}%`,
+          }}
+        />
+      </div>
     </div>
   );
 };

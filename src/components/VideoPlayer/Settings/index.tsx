@@ -5,6 +5,7 @@ import Output from "./Output";
 import CustomContent from "./CustomContent";
 import Cli from "./Cli";
 import Context from "@context";
+import { AudioVizIcon, FolderIcon, HearAudioIcon } from "@icon";
 import { Switch } from "@ui";
 
 import styles from "@styles/components/VideoPlayer/settings.module.scss";
@@ -43,17 +44,24 @@ const Settings: React.FC = () => {
       <CustomContent />
 
       <li className={styles.switch}>
+        <AudioVizIcon />
         <h5>Custom Audio</h5>
         <Switch state={customAudio} setState={setCustomAudio} />
       </li>
 
       <li className={styles.voice}>
+        <HearAudioIcon />
+
         <h5>Voice</h5>
+
         <Voice />
       </li>
 
       <li>
+        <FolderIcon />
+
         <h5>Export</h5>
+
         <Output />
       </li>
 

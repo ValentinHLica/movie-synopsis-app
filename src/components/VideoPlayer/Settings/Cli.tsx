@@ -50,6 +50,22 @@ const Cli: React.FC = () => {
       }
 
       localStorage.setItem(type, path);
+    } else {
+      switch (type) {
+        case "ffmpeg":
+          setFfmpegPath(null);
+          break;
+
+        case "ffprobe":
+          setFfprobePath(null);
+          break;
+
+        case "balcon":
+          setBlaconPath(null);
+          break;
+      }
+
+      localStorage.removeItem(type);
     }
   };
 
@@ -82,50 +98,38 @@ const Cli: React.FC = () => {
   return (
     <>
       <li>
+        <FolderIcon />
+
         <h5>FFMPEG</h5>
 
         <div>
           <Input readOnly placeholder={ffmpegPath ?? "..."} />
 
-          <Button
-            onClick={updatePath.bind(this, "ffmpeg")}
-            size="sm"
-            icon={<FolderIcon />}
-          >
-            Change
-          </Button>
+          <Button onClick={updatePath.bind(this, "ffmpeg")}>Change</Button>
         </div>
       </li>
 
       <li>
+        <FolderIcon />
+
         <h5>FFPROBE</h5>
 
         <div>
           <Input readOnly placeholder={ffprobePath ?? "..."} />
 
-          <Button
-            onClick={updatePath.bind(this, "ffprobe")}
-            size="sm"
-            icon={<FolderIcon />}
-          >
-            Change
-          </Button>
+          <Button onClick={updatePath.bind(this, "ffprobe")}>Change</Button>
         </div>
       </li>
 
       <li>
+        <FolderIcon />
+
         <h5>Balcon</h5>
 
         <div>
           <Input readOnly placeholder={blaconPath ?? "..."} />
 
-          <Button
-            onClick={updatePath.bind(this, "balcon")}
-            size="sm"
-            icon={<FolderIcon />}
-          >
-            Change
-          </Button>
+          <Button onClick={updatePath.bind(this, "balcon")}>Change</Button>
         </div>
       </li>
     </>

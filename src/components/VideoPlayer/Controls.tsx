@@ -2,7 +2,14 @@ import React, { useContext, useEffect, useState } from "react";
 
 import moment from "moment";
 
-import { SettingsIcon, FullScreenIcon, FullScreenExitIcon } from "@icon";
+import {
+  SettingsIcon,
+  FullScreenIcon,
+  FullScreenExitIcon,
+  PlayIcon,
+  PauseIcon,
+  SubtitleIcon,
+} from "@icon";
 import Context from "@context";
 import TimeStamp from "./Timestamp/index";
 import Progress from "./Progress";
@@ -93,32 +100,59 @@ const Controls: React.FC = () => {
     }
   };
 
-  const timestampHandler = () => {
-    setViewTimestamp(true);
+  const onPlay = () => {
+    if (videoEl && videoEl.current) {
+      const method = videoEl.current.paused ? "play" : "pause";
+      videoEl.current[method]();
 
+      if (method === "play") {
+        setViewTimestamp(false);
+        setSettings(false);
+      }
+    }
+  };
+
+  const timestampHandler = () => {
     if (settings) {
       setSettings(false);
     }
+
+    setViewTimestamp((prevState) => {
+      if (prevState) {
+        if (videoEl && videoEl.current) {
+          videoEl.current.play();
+        }
+      } else {
+        if (videoEl && videoEl.current) {
+          videoEl.current.pause();
+        }
+      }
+      return !prevState;
+    });
 
     setAddStamp((prevState) => ({
       ...prevState,
       startTime: moment.utc(currentTime * 1000).format("HH:mm:ss"),
     }));
-
-    if (videoEl && videoEl.current) {
-      videoEl.current.pause();
-    }
   };
 
   const settingsHandler = () => {
-    setSettings(true);
+    setSettings((prevState) => {
+      if (prevState) {
+        if (videoEl && videoEl.current) {
+          videoEl.current.play();
+        }
+      } else {
+        if (videoEl && videoEl.current) {
+          videoEl.current.pause();
+        }
+      }
+
+      return !prevState;
+    });
 
     if (viewTimestamp) {
       setViewTimestamp(false);
-    }
-
-    if (videoEl && videoEl.current) {
-      videoEl.current.pause();
     }
   };
 
@@ -155,11 +189,29 @@ const Controls: React.FC = () => {
     >
       <Subtitle />
 
-      <Progress />
+      <Progress className={styles.progress} />
 
       <ul className={styles.content}>
-        <li className={styles.content__time} onClick={timestampHandler}>
-          {moment.utc(currentTime * 1000).format("HH:mm:ss")}
+        <li onClick={onPlay}>
+          {videoEl && videoEl.current && videoEl.current.paused ? (
+            <PlayIcon />
+          ) : (
+            <PauseIcon />
+          )}
+        </li>
+
+        <li className={styles.content__time}>
+          <p>{moment.utc(currentTime * 1000).format("HH:mm:ss")}</p>
+          <span>/</span>
+          <p>
+            {videoEl &&
+              videoEl.current &&
+              moment.utc(videoEl.current.duration * 1000).format("HH:mm:ss")}
+          </p>
+        </li>
+
+        <li onClick={timestampHandler}>
+          <SubtitleIcon />
         </li>
 
         <li className={styles.settings} onClick={settingsHandler}>

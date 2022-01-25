@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 
 import { Tabs } from "@ui";
+import { AddIcon, SubtitleIcon, SaveIcon, MovieIcon } from "@icon";
 import Context from "@context";
 import Create from "./Create";
 import Timestamps from "./Timestamps";
@@ -21,19 +22,35 @@ const Timestamp: React.FC = () => {
       <Tabs
         tabs={[
           {
-            text: "Add",
+            text: (
+              <>
+                <AddIcon /> Add
+              </>
+            ),
             content: <Add />,
           },
           {
-            text: "Timestamps",
+            text: (
+              <>
+                <SubtitleIcon /> Timestamps
+              </>
+            ),
             content: <Timestamps />,
           },
           {
-            text: "Create",
+            text: (
+              <>
+                <MovieIcon /> Create
+              </>
+            ),
             content: <Create />,
           },
           {
-            text: "Saves",
+            text: (
+              <>
+                <SaveIcon /> Saves
+              </>
+            ),
             content: <Saves />,
           },
         ]}

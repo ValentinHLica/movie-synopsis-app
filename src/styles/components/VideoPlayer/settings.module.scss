@@ -2,34 +2,44 @@
   position: absolute;
   bottom: 65px;
   right: 0;
-  height: 40vh;
-  width: 400px;
+  height: 50vh;
+  width: 500px;
   display: flex;
   flex-direction: column;
   row-gap: 20px;
   background-color: var(--main-gray);
   color: white;
-  padding: 10px;
+  padding: 15px;
+  margin-right: 10px;
   visibility: visible;
   opacity: 1;
-  transition: visibility 0.3s ease, opacity 0.3s ease;
+  overflow-y: scroll;
   border-radius: var(--border-radius);
   cursor: auto !important;
-  overflow-y: scroll;
+  transform: translateX(0px);
+  transition: visibility 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
 
   &__hidden {
     visibility: hidden;
     opacity: 0;
+    transform: translateX(10px);
   }
 
   li {
     display: flex;
     align-items: center;
     column-gap: 10px;
-    font-size: 15px;
+
+    &:nth-child(2) {
+      svg {
+        transform: rotate(180deg);
+      }
+    }
 
     h5 {
       width: 90px;
+      font-size: 14px;
+      font-weight: 400;
     }
 
     input {

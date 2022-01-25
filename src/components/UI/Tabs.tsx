@@ -3,7 +3,7 @@ import React, { Fragment, useState } from "react";
 import styles from "@styles/components/UI/tabs.module.scss";
 
 type Props = {
-  tabs: { text: string; content: JSX.Element }[];
+  tabs: { text: string | JSX.Element; content: JSX.Element }[];
 };
 
 const Tabs: React.FC<Props> = ({ tabs }) => {

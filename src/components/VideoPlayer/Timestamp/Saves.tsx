@@ -37,7 +37,9 @@ const SavedTimeStampCard: React.FC<SaveCardProps> = ({
     });
   };
 
-  const fileName = title.split("\\")[title.split("\\").length - 1];
+  const fileName = title
+    .split("\\")
+    [title.split("\\").length - 1].replace(".mp4", "");
 
   return (
     <div className={styles.save__item} onDoubleClick={onDoubleClick}>

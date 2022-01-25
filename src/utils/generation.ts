@@ -47,9 +47,13 @@ export const createMovie: CreateVideo = async ({
     const intro = localStorage.getItem("intro");
     const outro = localStorage.getItem("outro");
     const outroImage = localStorage.getItem("outro-image");
+    const trimDuration = localStorage.getItem("trim-duration");
     const ffmpeg = localStorage.getItem("ffmpeg");
     const ffprobe = localStorage.getItem("ffprobe");
     const balcon = localStorage.getItem("balcon");
+
+    const configHandler = (value: string | null) =>
+      value && value !== "" ? value : null;
 
     const movieConfig: MovieData = {
       moviePath: videoPath,
@@ -59,15 +63,15 @@ export const createMovie: CreateVideo = async ({
       categories,
       voice,
       cli: {
-        ffmpeg: ffmpeg && ffmpeg !== "" ? ffmpeg : null,
-        ffprobe: ffprobe && ffprobe !== "" ? ffprobe : null,
-        balcon: balcon && balcon !== "" ? balcon : null,
+        ffmpeg: configHandler(ffmpeg),
+        ffprobe: configHandler(ffprobe),
+        balcon: configHandler(balcon),
       },
-      audioTrimDuration: 0.8,
+      audioTrimDuration: Number(trimDuration),
       customAudio,
-      intro: intro && intro !== "" ? intro : null,
-      outro: outro && outro !== "" ? outro : null,
-      outroImage: outroImage && outroImage !== "" ? outroImage : null,
+      intro: configHandler(intro),
+      outro: configHandler(outro),
+      outroImage: configHandler(outroImage),
     };
 
     writeFileSync(movieConfigPath, JSON.stringify(movieConfig));
@@ -87,6 +91,8 @@ export const createMovie: CreateVideo = async ({
 
         resolve(stdout);
       }).stdout.on("data", (data: string) => {
+        console.log(data);
+
         if (data.includes("process-count=")) {
           setTotalProgress((prevState) => {
             if (prevState !== 0) {

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 
 import { Button, Input } from "@ui";
-import { FolderIcon } from "@icon";
 
 const { dialog } = window.require("@electron/remote");
 const { existsSync } = window.require("fs");
@@ -33,6 +32,10 @@ const OutputVideo: React.FC = () => {
       setOutputPath(path);
 
       localStorage.setItem("output-path", path);
+    } else {
+      setOutputPath(null);
+
+      localStorage.removeItem("output-path");
     }
   };
 
@@ -50,9 +53,7 @@ const OutputVideo: React.FC = () => {
     <div>
       <Input readOnly placeholder={outputPath ?? "..."} />
 
-      <Button onClick={updatePath} size="sm" icon={<FolderIcon />}>
-        Change
-      </Button>
+      <Button onClick={updatePath}>Change</Button>
     </div>
   );
 };

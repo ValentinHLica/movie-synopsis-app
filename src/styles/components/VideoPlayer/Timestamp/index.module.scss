@@ -3,21 +3,24 @@
   bottom: 65px;
   max-height: 60vh;
   min-height: 100%;
-  width: 400px;
+  width: 500px;
   display: flex;
   flex-direction: column-reverse;
   row-gap: 20px;
   background-color: var(--main-gray);
   color: white;
-  padding: 10px;
+  padding: 15px;
   visibility: visible;
   opacity: 1;
-  transition: visibility 0.3s ease, opacity 0.3s ease;
   border-radius: var(--border-radius);
   cursor: auto !important;
+  margin-left: 10px;
+  transform: translateX(0px);
+  transition: visibility 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
 
   &__hidden {
     visibility: hidden;
     opacity: 0;
+    transform: translateX(-10px);
   }
 }

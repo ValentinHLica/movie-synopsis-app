@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 
-import { Button, Dropdown, Input } from "@ui";
-import { HearAudioIcon } from "@icon";
+import { Dropdown, Input } from "@ui";
 
 import { getVoices, listenVoice } from "@utils/helpers";
 
@@ -55,19 +54,9 @@ const VoiceChanger: React.FC = () => {
           };
         })}
         onClick={() => {
-          loadVoices();
-        }}
-      />
-
-      <Button
-        size="sm"
-        icon={<HearAudioIcon />}
-        onClick={() => {
           listenVoice(inputEl.current?.value);
         }}
-      >
-        Speak
-      </Button>
+      />
     </div>
   );
 };
