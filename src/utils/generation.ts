@@ -1,10 +1,9 @@
 import { join } from "path";
 
-import { tempPath, renderPath, cliPath } from "@config/paths";
+import { tempPath, cliPath } from "@config/paths";
 
-import { copyFolderRecursiveSync, deleteFolder, logger } from "@utils/helpers";
+import { copyFolderRecursiveSync, logger } from "@utils/helpers";
 import { MovieData, TimeStamp } from "@interface/movie";
-import { copyFileSync } from "fs";
 
 const { execFile } = window.require("child_process");
 const { writeFileSync, existsSync, mkdirSync } = window.require("fs");
