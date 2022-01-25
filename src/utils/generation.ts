@@ -1,9 +1,10 @@
 import { join } from "path";
 
-import { tempPath, renderPath } from "@config/paths";
+import { tempPath, renderPath, cliPath } from "@config/paths";
 
-import { logger } from "@utils/helpers";
+import { copyFolderRecursiveSync, deleteFolder, logger } from "@utils/helpers";
 import { MovieData, TimeStamp } from "@interface/movie";
+import { copyFileSync } from "fs";
 
 const { execFile } = window.require("child_process");
 const { writeFileSync, existsSync, mkdirSync } = window.require("fs");
@@ -40,6 +41,7 @@ export const createMovie: CreateVideo = async ({
   try {
     if (!existsSync(tempPath)) {
       mkdirSync(tempPath);
+      copyFolderRecursiveSync(cliPath, tempPath);
     }
 
     const movieConfigPath = join(tempPath, "movie.json");
@@ -81,16 +83,20 @@ export const createMovie: CreateVideo = async ({
 
       const args = [`MOVIE=${movieConfigPath}`];
 
-      await execFile(renderPath, args, (error: any, stdout: string) => {
-        if (error) {
-          logger("Video couldn't render successfully", "error");
-          throw error;
+      await execFile(
+        join(tempPath, "cli", "render.exe"),
+        args,
+        (error: any, stdout: string) => {
+          if (error) {
+            logger("Video couldn't render successfully", "error");
+            throw error;
+          }
+
+          logger("Video rendered successfully", "success");
+
+          resolve(stdout);
         }
-
-        logger("Video rendered successfully", "success");
-
-        resolve(stdout);
-      }).stdout.on("data", (data: string) => {
+      ).stdout.on("data", (data: string) => {
         console.log(data);
 
         if (data.includes("process-count=")) {

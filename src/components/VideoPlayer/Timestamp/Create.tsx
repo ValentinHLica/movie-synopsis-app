@@ -15,9 +15,8 @@ const Create: React.FC = () => {
   const { videoPath, timestamps, setSettings, setViewTimestamp, customAudio } =
     useContext(Context);
 
-  const startTime = useRef<Date>(new Date());
   const [movieTitle, setMovieTitle] = useState<string>("");
-  const [currentTimer, setCurrentTimer] = useState<Date>(new Date());
+  const [currentTimer, setCurrentTimer] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
   const [progress, setProgress] = useState<number>(0);
@@ -59,8 +58,14 @@ const Create: React.FC = () => {
         }
       }
 
+      let interval: NodeJS.Timeout | undefined;
+
       if (!customAudioStep || customAudioStep === "video") {
         setLoading(true);
+
+        interval = setInterval(() => {
+          setCurrentTimer((prevValue) => prevValue + 1);
+        }, 1000);
       }
 
       try {
@@ -85,24 +90,16 @@ const Create: React.FC = () => {
         setCreateVideoStep(true);
       }
 
+      if (interval) {
+        clearInterval(interval);
+      }
+
       setLoading(false);
     } else {
       setViewTimestamp(false);
       setSettings(true);
     }
   };
-
-  useEffect(() => {
-    if (loading) {
-      const interval = setInterval(() => {
-        setCurrentTimer(new Date());
-      }, 1000);
-
-      return () => {
-        clearInterval(interval);
-      };
-    }
-  }, [loading]);
 
   return (
     <div className={styles.create}>
@@ -159,7 +156,7 @@ const Create: React.FC = () => {
       ) : (
         <div>
           <h5>{`Elapsed Time: ${moment
-            .utc(currentTimer.getTime() - startTime.current.getTime() * 1000)
+            .utc(currentTimer * 1000)
             .format("HH:mm:ss")}`}</h5>
 
           <Progress
