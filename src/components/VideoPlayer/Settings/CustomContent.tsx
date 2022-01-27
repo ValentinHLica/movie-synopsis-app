@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import { Button, Input } from "@ui";
-import { FolderIcon, StartIcon } from "@icon";
+import { ImageIcon, StartIcon, TimerIcon } from "@icon";
 
 const { dialog } = window.require("@electron/remote");
 
@@ -118,7 +118,7 @@ const CustomContent: React.FC = () => {
       </li>
 
       <li>
-        <StartIcon />
+        <TimerIcon />
 
         <h5>Time remove</h5>
 
@@ -133,7 +133,7 @@ const CustomContent: React.FC = () => {
       </li>
 
       <li>
-        <FolderIcon />
+        <ImageIcon />
 
         <h5>Outro Image</h5>
 

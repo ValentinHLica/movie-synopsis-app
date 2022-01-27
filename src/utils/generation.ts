@@ -17,7 +17,7 @@ type CreateVideo = (args: {
   voice: string | null;
   title: string;
   categories: string[];
-  customAudio: "audio" | "video" | null;
+  customAudio: boolean;
 }) => Promise<any>;
 
 /**
@@ -52,9 +52,10 @@ export const createMovie: CreateVideo = async ({
     const ffmpeg = localStorage.getItem("ffmpeg");
     const ffprobe = localStorage.getItem("ffprobe");
     const balcon = localStorage.getItem("balcon");
+    const bal4web = localStorage.getItem("bal4web");
 
     const configHandler = (value: string | null) =>
-      value && value !== "" ? value : null;
+      value && value !== "" && existsSync(value) ? value : null;
 
     const movieConfig: MovieData = {
       moviePath: videoPath,
@@ -67,9 +68,10 @@ export const createMovie: CreateVideo = async ({
         ffmpeg: configHandler(ffmpeg),
         ffprobe: configHandler(ffprobe),
         balcon: configHandler(balcon),
+        bal4web: configHandler(bal4web),
       },
-      audioTrimDuration: Number(trimDuration),
       customAudio,
+      audioTrimDuration: Number(trimDuration),
       intro: configHandler(intro),
       outro: configHandler(outro),
       outroImage: configHandler(outroImage),

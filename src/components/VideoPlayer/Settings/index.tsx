@@ -45,7 +45,9 @@ const Settings: React.FC = () => {
 
       <li className={styles.switch}>
         <AudioVizIcon />
+
         <h5>Custom Audio</h5>
+
         <Switch state={customAudio} setState={setCustomAudio} />
       </li>
 

@@ -6,7 +6,6 @@ import Context from "@context";
 
 import { createMovie } from "@utils/generation";
 import { categories } from "@data/movie";
-import { tempPath } from "@config/paths";
 
 import styles from "@styles/components/VideoPlayer/Timestamp/create.module.scss";
 import moment from "moment";
@@ -24,7 +23,6 @@ const Create: React.FC = () => {
   const [categoriesList, setCategoriesList] = useState<
     { name: string; selected: boolean }[]
   >(categories.map((e) => ({ name: e, selected: false })));
-  const [createVideoStep, setCreateVideoStep] = useState<boolean>(false);
 
   const onChangeCategories = (index: number) => {
     setCategoriesList((prevState) =>
@@ -46,27 +44,11 @@ const Create: React.FC = () => {
     const voice = localStorage.getItem("voice");
 
     if (exportPath && exportPath !== "" && movieTitle) {
-      let customAudioStep: "audio" | "video" | null = null;
+      let interval = setInterval(() => {
+        setCurrentTimer((prevValue) => prevValue + 1);
+      }, 1000);
 
-      if (customAudio) {
-        if (!createVideoStep) {
-          customAudioStep = "audio";
-
-          navigator.clipboard.writeText(tempPath);
-        } else {
-          customAudioStep = "video";
-        }
-      }
-
-      let interval: NodeJS.Timeout | undefined;
-
-      if (!customAudioStep || customAudioStep === "video") {
-        setLoading(true);
-
-        interval = setInterval(() => {
-          setCurrentTimer((prevValue) => prevValue + 1);
-        }, 1000);
-      }
+      setLoading(true);
 
       try {
         await createMovie({
@@ -80,20 +62,13 @@ const Create: React.FC = () => {
           categories: categoriesList
             .filter((e) => e.selected)
             .map((e) => e.name),
-          customAudio: customAudioStep,
+          customAudio,
         });
       } catch (error) {
         setError(true);
       }
 
-      if (customAudio) {
-        setCreateVideoStep(true);
-      }
-
-      if (interval) {
-        clearInterval(interval);
-      }
-
+      clearInterval(interval);
       setLoading(false);
     } else {
       setViewTimestamp(false);
@@ -139,9 +114,7 @@ const Create: React.FC = () => {
             onClick={createVideo}
             className={styles.create_btn}
             loading={loading}
-            icon={
-              customAudio && !createVideoStep ? <AudioVizIcon /> : <MovieIcon />
-            }
+            icon={<MovieIcon />}
             disabled={
               !(
                 timestamps.length > 0 &&
@@ -150,7 +123,7 @@ const Create: React.FC = () => {
               )
             }
           >
-            Create {customAudio && !createVideoStep ? "Audio" : "Video"}
+            Create Video
           </Button>
         </form>
       ) : (

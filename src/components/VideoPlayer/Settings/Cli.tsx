@@ -6,12 +6,13 @@ import { FolderIcon } from "@icon";
 const { dialog } = window.require("@electron/remote");
 const { existsSync } = window.require("fs");
 
-type Clis = "ffmpeg" | "ffprobe" | "balcon";
+type Clis = "ffmpeg" | "ffprobe" | "balcon" | "bal4web";
 
 const Cli: React.FC = () => {
   const [ffmpegPath, setFfmpegPath] = useState<string | null>(null);
   const [ffprobePath, setFfprobePath] = useState<string | null>(null);
   const [blaconPath, setBlaconPath] = useState<string | null>(null);
+  const [bal4web, setBal4web] = useState<string | null>(null);
   const [isClicked, setIsClicked] = useState<boolean>(false);
 
   const getPath = async () => {
@@ -47,6 +48,10 @@ const Cli: React.FC = () => {
         case "balcon":
           setBlaconPath(path);
           break;
+
+        case "bal4web":
+          setBal4web(path);
+          break;
       }
 
       localStorage.setItem(type, path);
@@ -62,6 +67,10 @@ const Cli: React.FC = () => {
 
         case "balcon":
           setBlaconPath(null);
+          break;
+
+        case "bal4web":
+          setBal4web(path);
           break;
       }
 
@@ -88,6 +97,10 @@ const Cli: React.FC = () => {
 
             case "balcon":
               setBlaconPath(filePath);
+              break;
+
+            case "bal4web":
+              setBal4web(filePath);
               break;
           }
         }
@@ -130,6 +143,18 @@ const Cli: React.FC = () => {
           <Input readOnly placeholder={blaconPath ?? "..."} />
 
           <Button onClick={updatePath.bind(this, "balcon")}>Change</Button>
+        </div>
+      </li>
+
+      <li>
+        <FolderIcon />
+
+        <h5>Bal4Web</h5>
+
+        <div>
+          <Input readOnly placeholder={bal4web ?? "..."} />
+
+          <Button onClick={updatePath.bind(this, "bal4web")}>Change</Button>
         </div>
       </li>
     </>
