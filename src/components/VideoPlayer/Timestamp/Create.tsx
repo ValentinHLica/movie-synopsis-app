@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 
 import { Button, Input, Progress } from "@ui";
-import { MovieIcon, AudioVizIcon } from "@icon";
+import { MovieIcon } from "@icon";
 import Context from "@context";
 
 import { createMovie } from "@utils/generation";

@@ -79,7 +79,7 @@ const Cli: React.FC = () => {
   };
 
   useEffect(() => {
-    const clis: Clis[] = ["ffmpeg", "ffprobe", "balcon"];
+    const clis: Clis[] = ["ffmpeg", "ffprobe", "balcon", "bal4web"];
 
     for (const cli of clis) {
       const filePath = localStorage.getItem(cli);
