@@ -2,8 +2,15 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 
 import { Dropdown, Input } from "@ui";
 import Context from "@context";
+import { tempPath, cliPath, tempDataDir } from "@config/paths";
 
-import { getVoices, listenVoice } from "@utils/helpers";
+import {
+  getVoices,
+  listenVoice,
+  copyFolderRecursiveSync,
+} from "@utils/helpers";
+
+const { existsSync, mkdirSync } = window.require("fs");
 
 const VoiceChanger: React.FC = () => {
   const { customAudio } = useContext(Context);
@@ -14,6 +21,11 @@ const VoiceChanger: React.FC = () => {
   const [voices, setVoices] = useState<string[]>([]);
 
   const loadVoices = async () => {
+    if (!existsSync(tempPath)) {
+      mkdirSync(tempPath);
+      copyFolderRecursiveSync(cliPath, tempPath);
+    }
+
     let listOfVoices: string[];
 
     const balcon = localStorage.getItem("balcon");
@@ -46,6 +58,29 @@ const VoiceChanger: React.FC = () => {
     setSelectedVoice(voice);
   };
 
+  const listenVoiceAudio = async () => {
+    setAudioPath(null);
+
+    if (!existsSync(tempPath)) {
+      mkdirSync(tempPath);
+      copyFolderRecursiveSync(cliPath, tempPath);
+    }
+
+    if (!existsSync(tempDataDir)) {
+      mkdirSync(tempDataDir);
+    }
+
+    setAudioPath(
+      await listenVoice({
+        text:
+          inputEl.current?.value !== ""
+            ? inputEl.current?.value
+            : "Hello World this is a test",
+        customAudio,
+      })
+    );
+  };
+
   useEffect(() => {
     loadVoices();
 
@@ -68,19 +103,7 @@ const VoiceChanger: React.FC = () => {
             onClick: onVoiceChange.bind(this, voice),
           };
         })}
-        onClick={async () => {
-          setAudioPath(null);
-
-          setAudioPath(
-            await listenVoice({
-              text:
-                inputEl.current?.value !== ""
-                  ? inputEl.current?.value
-                  : "Hello World this is a test",
-              customAudio,
-            })
-          );
-        }}
+        onClick={listenVoiceAudio}
       />
     </div>
   );
