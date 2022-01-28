@@ -1,7 +1,7 @@
 {
   "name": "movie-synopsis-app",
   "version": "1.0.0",
-  "description": "Create videos from reddit posts",
+  "description": "Create videos from movies",
   "private": true,
   "main": "public/main.js",
   "homepage": "./",
@@ -14,19 +14,12 @@
     "build": "npm run clear:build && npm run build:ui && electron-builder -c.extraMetadata.main=build/main.js",
     "app": "npm run clear:build && npm run build:ui && electron-builder -c.extraMetadata.main=build/main.js --win portable"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ValentinHLica/reddit-recap.git"
-  },
   "keywords": [],
   "author": {
     "email": "licavalentinh@gmail.com",
     "name": "Valentin Lica"
   },
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/ValentinHLica/reddit-recap/issues"
-  },
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -66,21 +59,16 @@
     "@types/node": "^12.20.25",
     "@types/react": "^17.0.22",
     "@types/react-dom": "^17.0.9",
-    "dateformat": "^5.0.2",
     "electron-is-dev": "^2.0.0",
-    "jimp": "^0.16.1",
     "moment": "^2.29.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-dropzone": "^11.4.2",
-    "react-image-crop": "^9.0.4",
     "react-scripts": "4.0.3",
     "sass": "^1.42.0",
-    "typescript": "^4.4.3",
-    "web-vitals": "^1.1.2"
+    "typescript": "^4.4.3"
   },
   "devDependencies": {
-    "@types/dateformat": "^5.0.0",
     "concurrently": "^6.2.1",
     "cross-env": "^7.0.3",
     "electron": "11.2.1",
