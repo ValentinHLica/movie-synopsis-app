@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 
 import { Button } from "@ui";
-import { SaveIcon } from "@icon";
+import { SaveIcon, WarningIcon } from "@icon";
 import Stamp from "../Stamp";
 import Context from "@context";
 import { LocalTimeStamp, TimeStamp } from "@interface/movie";
@@ -89,7 +89,11 @@ const Timestamps: React.FC = () => {
   const { timestamps, setTimestamps, videoEl } = useContext(Context);
 
   if (!(timestamps.length > 0)) {
-    return <h4>No Time Stamps</h4>;
+    return (
+      <h4>
+        <WarningIcon /> No Time Stamps
+      </h4>
+    );
   }
 
   const onChange = (

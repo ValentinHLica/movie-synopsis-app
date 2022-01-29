@@ -4,12 +4,10 @@
   max-width: 100%;
   max-height: 50vh;
   resize: none;
-  border-radius: var(--border-radius);
   font-size: 13px;
   line-height: 23px;
   padding: 5px 10px;
-  transition: background-color 0.3s ease;
-  border: 1px solid var(--gray-6);
-  background-color: var(--main-gray);
-  color: white;
+  border-radius: var(--border-radius);
+  color: var(--color);
+  background-color: var(--background);
 }

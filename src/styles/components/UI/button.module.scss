@@ -6,12 +6,11 @@
 
 .container {
   cursor: pointer;
-  background-color: var(--main-red);
+  background-color: var(--red-7);
   color: white;
   border: none;
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
   display: inline-block;
-  box-shadow: 0 0 1px var(--gray-400);
   border-radius: var(--border-radius);
   font-size: 13px;
   line-height: 23px;
@@ -21,7 +20,11 @@
 
   &[disabled] {
     cursor: not-allowed;
-    background-color: var(--gray-3);
+    background-color: var(--red-9);
+  }
+
+  &:hover {
+    background-color: var(--red-8);
   }
 
   svg {

@@ -2,18 +2,22 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  max-width: 40px;
+  max-width: 45px;
   border-radius: 30px;
-  background-color: var(--gray-3);
-  border: 1px solid var(--gray-1);
+  background-color: var(--background-light);
   transition: background-color 0.3s ease;
   cursor: pointer;
+  padding: 2px;
 
   &__on {
-    background-color: var(--main-red);
+    background-color: var(--red-7);
 
     .switch__button {
-      transform: translateX(calc(100% - 2px));
+      transform: translateX(100%);
+    }
+
+    &:hover {
+      background-color: var(--red-8);
     }
   }
 

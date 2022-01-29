@@ -4,7 +4,7 @@ import moment from "moment";
 
 import { LocalTimeStamp } from "@interface/movie";
 import Context from "@context";
-import { CloseIcon, SubtitleIcon } from "@icon";
+import { CloseIcon, SubtitleIcon, WarningIcon } from "@icon";
 
 import styles from "@styles/components/VideoPlayer/Timestamp/saves.module.scss";
 
@@ -85,7 +85,9 @@ const Saves: React.FC = () => {
           ))}
         </ul>
       ) : (
-        <h4>No Saved Timestamps</h4>
+        <h4>
+          <WarningIcon /> No Saved Timestamps
+        </h4>
       )}
     </div>
   );

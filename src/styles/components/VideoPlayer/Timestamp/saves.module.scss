@@ -9,29 +9,31 @@
     row-gap: 10px;
 
     .save__item {
-      user-select: none;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
       flex-direction: column;
-      border: 1px solid var(--gray-6);
+      border: 1px solid var(--border);
       border-radius: var(--border-radius);
+      background-color: var(--background);
       padding: 5px;
       cursor: pointer;
       transition: border-color 0.3s ease, background-color 0.3s ease;
 
       &:hover {
-        background-color: var(--main-red);
-        border-color: var(--gray-1);
+        background-color: var(--background-light);
       }
 
       .remove {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         align-self: flex-end;
-        transition: color 0.3s ease;
+        transition: background-color 0.3s ease;
 
         &:hover {
-          color: var(--gray-1);
+          background-color: var(--background);
         }
       }
 

@@ -7,18 +7,20 @@
     display: flex;
     align-items: center;
     position: relative;
-    padding-bottom: 5px;
+    padding: 5px 0;
 
     .tab {
       margin-right: 15px;
       font-size: 14px;
-      padding-bottom: 5px;
+      padding: 0 3px 5px 3px;
       box-shadow: 0 2px transparent;
       transition: box-shadow 0.3s ease;
       cursor: pointer;
-      color: var(--gray-5);
+      color: var(--color-light);
       display: flex;
       align-items: center;
+      justify-content: center;
+      transition: color 0.3s ease;
 
       svg {
         margin-right: 5px;
@@ -29,8 +31,8 @@
       }
 
       &.tab__selected {
-        box-shadow: 0 2px var(--gray-5);
-        color: white;
+        color: var(--color);
+        box-shadow: 0 2px var(--color);
       }
     }
   }

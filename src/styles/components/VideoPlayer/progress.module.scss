@@ -36,7 +36,7 @@
     .progress_bar {
       width: 50%;
       height: 5px;
-      background: var(--main-red);
+      background: var(--red-7);
       flex: 0;
       flex-basis: 50%;
       position: relative;
@@ -54,7 +54,7 @@
         bottom: 0;
         height: 12px;
         width: 12px;
-        background: var(--main-red);
+        background: var(--red-7);
         // transform: translateY(-27%);
         transform: scale(0.5);
         border-radius: 50%;

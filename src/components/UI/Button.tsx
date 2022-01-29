@@ -1,8 +1,8 @@
 import React from "react";
 
-import Spinner from "./Spinner";
-
 import { Size, Type } from "@interface/UI/button";
+
+import Spinner from "./Spinner";
 
 import styles from "@styles/components/UI/button.module.scss";
 

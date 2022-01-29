@@ -3,23 +3,22 @@
   max-height: 100%;
 
   .content {
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 
     .timestamp__item {
       font-size: 15px;
-      // position: relative;
       border-radius: var(--border-radius);
       padding: 0 2px;
       transition: background-color 0.2s ease, color 0.2s ease;
-      user-select: none;
+      cursor: pointer;
 
       &:hover {
-        background-color: var(--main-red);
-        cursor: pointer;
+        background-color: var(--red-7);
+        color: white;
       }
 
       &__current {
-        background-color: var(--main-red);
+        background-color: var(--red-8);
       }
 
       .item__controls {
@@ -27,7 +26,7 @@
         top: 0;
         transform: translateX(calc(500px - 5px));
         min-width: 400px;
-        background: var(--main-gray);
+        background: var(--background);
         padding: 10px;
         border-radius: var(--border-radius);
         box-shadow: 0 0 5px 0px #00000085;
@@ -48,4 +47,11 @@
 h4 {
   text-align: center;
   padding: 20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    margin-right: 5px;
+  }
 }

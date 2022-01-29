@@ -11,15 +11,24 @@ import styles from "@styles/components/VideoPlayer/Timestamp/create.module.scss"
 import moment from "moment";
 
 const Create: React.FC = () => {
-  const { videoPath, timestamps, setSettings, setViewTimestamp, customAudio } =
-    useContext(Context);
+  const {
+    videoPath,
+    timestamps,
+    setSettings,
+    setViewTimestamp,
+    customAudio,
+    createLoading,
+    setCreateLoading,
+    progress,
+    setProgress,
+    totalProgress,
+    setTotalProgress,
+    currentTimer,
+    setCurrentTimer,
+  } = useContext(Context);
 
   const [movieTitle, setMovieTitle] = useState<string>("");
-  const [currentTimer, setCurrentTimer] = useState<number>(0);
-  const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
-  const [progress, setProgress] = useState<number>(0);
-  const [totalProgress, setTotalProgress] = useState<number>(0);
   const [categoriesList, setCategoriesList] = useState<
     { name: string; selected: boolean }[]
   >(categories.map((e) => ({ name: e, selected: false })));
@@ -48,7 +57,7 @@ const Create: React.FC = () => {
         setCurrentTimer((prevValue) => prevValue + 1);
       }, 1000);
 
-      setLoading(true);
+      setCreateLoading(true);
 
       try {
         await createMovie({
@@ -69,7 +78,8 @@ const Create: React.FC = () => {
       }
 
       clearInterval(interval);
-      setLoading(false);
+      setCreateLoading(false);
+      setProgress(0);
     } else {
       setViewTimestamp(false);
       setSettings(true);
@@ -78,7 +88,7 @@ const Create: React.FC = () => {
 
   return (
     <div className={styles.create}>
-      {!loading && progress === 0 ? (
+      {!createLoading && progress === 0 ? (
         <form className={styles.form} onSubmit={(e) => e.preventDefault()}>
           <div className={styles.form__item}>
             <h5>Title:</h5>
@@ -113,7 +123,7 @@ const Create: React.FC = () => {
           <Button
             onClick={createVideo}
             className={styles.create_btn}
-            loading={loading}
+            loading={createLoading}
             icon={<MovieIcon />}
             disabled={
               !(
@@ -134,7 +144,7 @@ const Create: React.FC = () => {
 
           <Progress
             max={totalProgress}
-            value={loading ? progress : totalProgress}
+            value={createLoading ? progress : totalProgress}
           />
         </div>
       )}

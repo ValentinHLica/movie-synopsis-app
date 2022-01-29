@@ -1,7 +1,8 @@
-import React, { useContext, useRef } from "react";
+import React, { useContext, useRef, useState } from "react";
 
 import Controls from "./Controls";
 import Context from "@context";
+import { Spinner } from "@ui";
 
 import styles from "@styles/components/VideoPlayer/index.module.scss";
 
@@ -18,6 +19,7 @@ const Player: React.FC = () => {
   } = useContext(Context);
 
   const timeOut = useRef<NodeJS.Timeout>();
+  const [loading, setLoading] = useState<boolean>(true);
 
   const onVideoClick = () => {
     if (videoEl && videoEl.current) {
@@ -59,18 +61,28 @@ const Player: React.FC = () => {
   };
 
   return (
-    <div className={styles.player} ref={playerEl} onMouseMove={onMouseMove}>
-      <video
-        src={videoPath as string}
-        className={styles.video}
-        ref={videoEl}
-        autoPlay
-        onClick={onVideoClick}
-        onDoubleClick={onDoubleClick}
+    <>
+      <Spinner
+        className={`${styles.spinner} ${loading ? styles.spinner__on : ""}`}
       />
+      <div className={styles.player} ref={playerEl} onMouseMove={onMouseMove}>
+        <video
+          src={videoPath as string}
+          className={styles.video}
+          ref={videoEl}
+          autoPlay
+          onClick={onVideoClick}
+          onDoubleClick={onDoubleClick}
+          onPlay={() => {
+            if (loading) {
+              setLoading(false);
+            }
+          }}
+        />
 
-      <Controls />
-    </div>
+        <Controls />
+      </div>
+    </>
   );
 };
 

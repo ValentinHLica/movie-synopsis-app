@@ -7,8 +7,8 @@
   display: flex;
   flex-direction: column-reverse;
   row-gap: 20px;
-  background-color: var(--main-gray);
-  color: white;
+  background-color: var(--background);
+  color: var(--color);
   padding: 15px;
   visibility: visible;
   opacity: 1;
@@ -16,7 +16,8 @@
   cursor: auto !important;
   margin-left: 10px;
   transform: translateX(0px);
-  transition: visibility 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+  transition: visibility 0.3s ease, opacity 0.3s ease, transform 0.3s ease,
+    background-color 0.3s ease;
 
   &__hidden {
     visibility: hidden;

@@ -73,9 +73,9 @@ const VoiceChanger: React.FC = () => {
     setAudioPath(
       await listenVoice({
         text:
-          inputEl.current?.value !== ""
-            ? inputEl.current?.value
-            : "Hello World this is a test",
+          inputEl.current && inputEl.current.value !== ""
+            ? inputEl.current.value
+            : `Hello my name is ${selectedVoice.replace("Neural", "")}`,
         customAudio,
       })
     );

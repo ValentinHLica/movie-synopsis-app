@@ -16,6 +16,11 @@
     font-size: 16px;
     padding-right: 0px;
     padding-left: 0px;
+
+    svg {
+      margin-right: 5px;
+      margin-left: 5px;
+    }
   }
 
   .posts__controls {
@@ -23,14 +28,14 @@
     bottom: 0;
     right: 0;
     transform: translateY(calc(100% + 5px));
-    background-color: var(--main-gray);
-    border: 1px solid var(--gray-8);
+    background-color: var(--background);
+    border: 1px solid var(--border);
     border-radius: var(--border-radius);
     visibility: hidden;
     opacity: 0;
-    transition: visibility 0.2s ease, opacity 0.2s ease;
     max-height: 150px;
     overflow-y: scroll;
+    transition: visibility 0.2s ease, opacity 0.2s ease;
 
     &__visible {
       visibility: visible;
@@ -39,14 +44,15 @@
     }
 
     .controls__item {
-      padding: 6px;
-      border-bottom: 1px solid var(--gray-8);
+      padding: 8px 10px;
+      border-bottom: 1px solid var(--border);
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: flex-start;
-      min-width: 70px;
-      color: white;
+      min-width: 90px;
+      color: var(--color);
+      transition: background-color 0.3s ease;
 
       svg {
         margin-right: 5px;
@@ -62,11 +68,11 @@
       }
 
       &:hover {
-        background-color: var(--main-red);
+        background-color: var(--red-8);
       }
 
       &__selected {
-        background-color: var(--main-red) !important;
+        background-color: var(--red-8) !important;
       }
 
       @include typography(14px, normal, 400, 16px, 0.02em, left);

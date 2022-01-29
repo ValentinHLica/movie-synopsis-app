@@ -4,12 +4,12 @@
   display: block;
 
   &::-webkit-progress-bar {
-    background-color: var(--gray-10);
+    background-color: var(--background-light);
     border-radius: var(--border-radius);
   }
 
   &::-webkit-progress-value {
-    background-color: var(--main-red);
+    background-color: var(--red-7);
     border-radius: var(--border-radius);
   }
 }

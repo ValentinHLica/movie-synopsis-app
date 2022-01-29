@@ -25,13 +25,13 @@
           font-size: 14px;
           padding: 3px 5px;
           border-radius: var(--border-radius);
-          background-color: var(--gray-11);
-          color: var(--gray-1);
+          background-color: var(--background-light);
+          color: var(--color);
           cursor: pointer;
           transition: background-color 0.3s ease, color 0.3s ease;
 
           &.selected {
-            background-color: var(--main-red);
+            background-color: var(--red-7);
             color: white;
           }
         }

@@ -7,8 +7,8 @@
   display: flex;
   flex-direction: column;
   row-gap: 20px;
-  background-color: var(--main-gray);
-  color: white;
+  background-color: var(--background);
+  color: var(--color);
   padding: 15px;
   margin-right: 10px;
   visibility: visible;
@@ -17,7 +17,8 @@
   border-radius: var(--border-radius);
   cursor: auto !important;
   transform: translateX(0px);
-  transition: visibility 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+  transition: visibility 0.3s ease, opacity 0.3s ease, transform 0.3s ease,
+    background-color 0.3s ease;
 
   &__hidden {
     visibility: hidden;
@@ -29,8 +30,9 @@
     display: flex;
     align-items: center;
     column-gap: 10px;
+    min-height: 34px;
 
-    &:nth-child(2) {
+    &.outro {
       svg {
         transform: rotate(180deg);
       }

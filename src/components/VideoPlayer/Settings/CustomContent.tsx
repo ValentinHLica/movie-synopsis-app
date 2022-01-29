@@ -104,7 +104,13 @@ const CustomContent: React.FC = () => {
       </li>
 
       <li>
-        <StartIcon />
+        <span
+          style={{
+            transform: "rotate(180deg)",
+          }}
+        >
+          <StartIcon />
+        </span>
 
         <h5>Outro</h5>
 
