@@ -32,7 +32,7 @@ const VoiceChanger: React.FC = () => {
     const bal4web = localStorage.getItem("bal4web");
 
     try {
-      listOfVoices = await getVoices({
+      listOfVoices = getVoices({
         customAudio,
         balcon,
         bal4web,

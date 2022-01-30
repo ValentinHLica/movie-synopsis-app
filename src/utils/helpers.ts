@@ -190,43 +190,41 @@ type GetVoices = (args: {
   customAudio: boolean;
   balcon: string | null;
   bal4web: string | null;
-}) => Promise<string[]>;
+}) => string[];
 
 /**
  * Get List of voices
  * @returns List of voices
  */
 export const getVoices: GetVoices = ({ customAudio, balcon, bal4web }) => {
-  return new Promise((resolve) => {
-    if (!customAudio) {
-      const voices = execSync(
-        `${existsSync(balcon) ? `"${balcon}"` : "balcon"} -l`
-      ).toString() as string;
+  if (!customAudio) {
+    const command = `${
+      balcon && existsSync(balcon) ? `"${balcon}"` : "balcon"
+    } -l`;
 
-      const listOfVoice = voices
-        .trim()
-        .split("\n")
-        .map((v) => v.trim())
-        .filter((v) => v !== "SAPI 5:");
+    const voices = execSync(command).toString() as string;
 
-      resolve(listOfVoice);
-    } else {
-      const voices = execSync(
-        `${existsSync(bal4web) ? `"${bal4web}"` : "bal4web"} -s m -m`
-      ).toString() as string;
+    return voices
+      .trim()
+      .split("\n")
+      .map((v) => v.trim())
+      .filter((v) => v !== "SAPI 5:");
+  } else {
+    const command = `${
+      bal4web && existsSync(bal4web) ? `"${bal4web}"` : "bal4web"
+    } -s m -m`;
 
-      const listOfVoice = voices
-        .trim()
-        .split("\n")
-        .map((v) => v.trim())
-        .filter((v) => v !== "* Microsoft Azure *" && v.includes("en-US"))[0]
-        .split(" en-US ")[1]
-        .slice(1, -1)
-        .split(", ");
+    const voices = execSync(command).toString() as string;
 
-      resolve(listOfVoice);
-    }
-  });
+    return voices
+      .trim()
+      .split("\n")
+      .map((v) => v.trim())
+      .filter((v) => v !== "* Microsoft Azure *" && v.includes("en-US"))[0]
+      .split(" en-US ")[1]
+      .slice(1, -1)
+      .split(", ");
+  }
 };
 
 type ListenVoice = (args: {
@@ -241,29 +239,25 @@ export const listenVoice: ListenVoice = ({ text, customAudio }) => {
   const balcon = localStorage.getItem("balcon");
   const bal4web = localStorage.getItem("bal4web");
 
-  return new Promise((resolve) => {
-    const voice = localStorage.getItem("voice");
+  const voice = localStorage.getItem("voice");
 
-    if (!customAudio) {
-      execSync(
-        `${
-          existsSync(balcon) ? `"${balcon}"` : "balcon"
-        } -n ${voice} -t ${text}`
-      );
-    } else {
-      const audioPath = join(tempDataDir, `${createRandomString(3)}-audio.wav`);
+  if (!customAudio) {
+    execSync(
+      `${existsSync(balcon) ? `"${balcon}"` : "balcon"} -n ${voice} -t ${text}`
+    );
+  } else {
+    const audioPath = join(tempDataDir, `${createRandomString(3)}-audio.wav`);
 
-      if (existsSync(audioPath)) {
-        unlinkSync(audioPath);
-      }
-
-      execSync(
-        `${
-          existsSync(bal4web) ? `"${bal4web}"` : "bal4web"
-        } -s m -l en-US -n ${voice} -t "${text}" -w "${audioPath}"`
-      );
-
-      resolve(audioPath);
+    if (existsSync(audioPath)) {
+      unlinkSync(audioPath);
     }
-  });
+
+    execSync(
+      `${
+        existsSync(bal4web) ? `"${bal4web}"` : "bal4web"
+      } -s m -l en-US -n ${voice} -t "${text}" -w "${audioPath}"`
+    );
+
+    return audioPath;
+  }
 };
