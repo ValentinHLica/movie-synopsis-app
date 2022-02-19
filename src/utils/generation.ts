@@ -48,7 +48,6 @@ export const createMovie: CreateVideo = async ({
     const intro = localStorage.getItem("intro");
     const outro = localStorage.getItem("outro");
     const outroImage = localStorage.getItem("outro-image");
-    const trimDuration = localStorage.getItem("trim-duration");
     const ffmpeg = localStorage.getItem("ffmpeg");
     const ffprobe = localStorage.getItem("ffprobe");
     const balcon = localStorage.getItem("balcon");
@@ -71,7 +70,6 @@ export const createMovie: CreateVideo = async ({
         bal4web: configHandler(bal4web),
       },
       customAudio,
-      audioTrimDuration: Number(trimDuration),
       intro: configHandler(intro),
       outro: configHandler(outro),
       outroImage: configHandler(outroImage),

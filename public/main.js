@@ -2,8 +2,9 @@ const { app, BrowserWindow, Menu, protocol } = require("electron");
 
 const path = require("path");
 const isDev = require("electron-is-dev");
+const { initialize, enable } = require("@electron/remote/main");
 
-require("@electron/remote/main").initialize();
+initialize();
 
 function createWindow() {
   protocol.registerFileProtocol("file", (request, callback) => {
@@ -14,14 +15,17 @@ function createWindow() {
   const win = new BrowserWindow({
     minWidth: 1000,
     minHeight: 600,
+    title: "Movie Synopsis",
     webPreferences: {
       nodeIntegration: true,
-      nodeIntegrationInWorker: true,
       enableRemoteModule: true,
       webSecurity: false,
+      contextIsolation: false,
     },
     autoHideMenuBar: true,
   });
+
+  enable(win.webContents);
 
   if (!isDev) {
     const mainMenu = Menu.buildFromTemplate([]);

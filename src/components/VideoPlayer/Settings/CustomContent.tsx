@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import { Button, Input } from "@ui";
-import { ImageIcon, StartIcon, TimerIcon } from "@icon";
+import { ImageIcon, StartIcon } from "@icon";
 
 const { dialog } = window.require("@electron/remote");
 
@@ -9,13 +9,12 @@ const CustomContent: React.FC = () => {
   const [intro, setIntro] = useState<string>("");
   const [outro, setOutro] = useState<string>("");
   const [outroImage, setOutroImage] = useState<string | null>(null);
-  const [trimDuration, setTrimDuration] = useState<string>("0");
   const [isClicked, setIsClicked] = useState<boolean>(false);
 
-  const onChange: (
-    type: "intro" | "outro" | "trim-duration",
-    value: string
-  ) => void = (type, value) => {
+  const onChange: (type: "intro" | "outro", value: string) => void = (
+    type,
+    value
+  ) => {
     switch (type) {
       case "intro":
         setIntro(value);
@@ -24,10 +23,6 @@ const CustomContent: React.FC = () => {
 
       case "outro":
         setOutro(value);
-        break;
-
-      case "trim-duration":
-        setTrimDuration(value);
         break;
     }
 
@@ -80,11 +75,6 @@ const CustomContent: React.FC = () => {
     if (savedOutroImage) {
       setOutroImage(savedOutroImage);
     }
-
-    const trimDurationLocal = localStorage.getItem("trim-duration");
-    if (trimDurationLocal) {
-      setTrimDuration(trimDurationLocal);
-    }
   }, []);
 
   return (
@@ -119,21 +109,6 @@ const CustomContent: React.FC = () => {
           value={outro}
           onChange={(e) => {
             onChange("outro", e.target.value);
-          }}
-        />
-      </li>
-
-      <li>
-        <TimerIcon />
-
-        <h5>Time remove</h5>
-
-        <Input
-          placeholder="Outro text..."
-          value={trimDuration}
-          type="number"
-          onChange={(e) => {
-            onChange("trim-duration", e.target.value);
           }}
         />
       </li>

@@ -23,7 +23,6 @@ export type MovieData = {
     bal4web: string | null;
   };
   customAudio: boolean;
-  audioTrimDuration: number;
   intro: string | null;
   outro: string | null;
   outroImage: string | null;

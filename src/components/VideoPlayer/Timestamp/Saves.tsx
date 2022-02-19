@@ -86,7 +86,7 @@ const Saves: React.FC = () => {
         </ul>
       ) : (
         <h4>
-          <WarningIcon /> No Saved Timestamps
+          <WarningIcon /> No Saves
         </h4>
       )}
     </div>

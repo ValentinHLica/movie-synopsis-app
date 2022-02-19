@@ -53,11 +53,11 @@ const Create: React.FC = () => {
     const voice = localStorage.getItem("voice");
 
     if (exportPath && exportPath !== "" && movieTitle) {
+      setCreateLoading(true);
+
       let interval = setInterval(() => {
         setCurrentTimer((prevValue) => prevValue + 1);
       }, 1000);
-
-      setCreateLoading(true);
 
       try {
         await createMovie({

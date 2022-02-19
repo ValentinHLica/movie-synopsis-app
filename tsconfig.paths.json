@@ -12,7 +12,8 @@
       "@icon": ["components/CustomIcons.tsx"],
       "@pages/*": ["pages/*"],
       "@api/*": ["api/*"],
-      "@context": ["components/Context.tsx"]
+      "@context": ["components/Context.tsx"],
+      "path": ["./node_modules/path-browserify"]
     }
   }
 }

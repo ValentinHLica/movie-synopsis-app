@@ -8,6 +8,9 @@
   .main__button {
     border-top-right-radius: 0px;
     border-bottom-right-radius: 0px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
   }
 
   .menu__button {
